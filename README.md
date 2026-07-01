@@ -195,32 +195,28 @@ examples/
 
 ---
 
-## Current validation stages
+## Current Validation Stages
 
-✔ V1A — Environment Check
+✔ **V1A — Environment Check**
 Verifies CUDA, GPU, PyTorch, Triton and runtime environment.
 
-> File:
-# scripts / v1a_environment_check.py
+**Script:** `scripts/v1a_environment_check.py`
 
-✔ V1B — Private Adapter Contract Check
+✔ **V1B — Private Adapter Contract Check**
 Verifies the public adapter interface without exposing the private kernel source code.
 
-> File:
-# scripts / v1b_adapter_contract.py
+**Script:** `scripts/v1b_adapter_contract.py`
 
-✔ V1C — Micro Correctness Audit
+✔ **V1C — Micro Correctness Audit**
 Compares the private implementation against an SDPA local-window reference on small test shapes.
 
-> File:
-# scripts / v1c_micro_correctness.py
+**Script:** `scripts/v1c_micro_correctness.py`
 
-✔ V1D — Runtime Smoke Benchmark
+✔ **V1D — Runtime Smoke Benchmark**
 Runs a lightweight runtime benchmark to verify reproducible execution on small shapes.
 This is not intended as a full performance benchmark.
 
-> File:
-# scripts / v1d_runtime_benchmark.py
+**Script:** `scripts/v1d_runtime_benchmark.py`
 
 ---
 
