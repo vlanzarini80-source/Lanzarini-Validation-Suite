@@ -261,6 +261,12 @@ Citation metadata will be provided through the included `CITATION.cff` file.
 
 ---
 
+The Validation Suite is intentionally independent from the proprietary Lanzarini sparse-local attention kernel.
+
+Its purpose is to validate experimental methodology, benchmark execution, artifact generation and reproducibility, enabling independent verification without exposing proprietary implementation details.
+
+```
+
 # License
 
 The Validation Suite is distributed under the repository license.
