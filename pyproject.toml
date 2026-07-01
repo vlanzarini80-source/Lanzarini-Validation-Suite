@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lanzarini-validation-suite"
+version = "1.0.0"
+description = "Public validation and reproducibility framework for sparse-local attention research."
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Valentino Lanzarini" }
+]
+requires-python = ">=3.11"
+
+dependencies = [
+    "torch>=2.4",
+    "triton>=3.0",
+    "numpy>=1.24",
+    "pandas>=2.0",
+    "matplotlib>=3.8"
+]
+
+keywords = [
+    "validation",
+    "reproducibility",
+    "gpu",
+    "triton",
+    "attention",
+    "benchmark"
+]
