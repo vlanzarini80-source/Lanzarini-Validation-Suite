@@ -388,7 +388,10 @@ The repository should **not** be interpreted as evidence that any attention impl
 Experimental conclusions remain strictly limited to the evaluated benchmark domains documented by the associated validation reports.
 
 ```
-CONTAC:
-vlanzarini80-source
+## Contact
+
+Research collaborations and technical inquiries:
+
+📧 vlanzarini80@gmail.com
 
 ```
