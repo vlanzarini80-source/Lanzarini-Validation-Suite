@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+title: "Lanzarini Validation Suite"
+message: "If you use this repository in your research, please cite it using the metadata below."
+type: software
+
+authors:
+  - family-names: "Lanzarini"
+    given-names: "Valentino"
+
+repository-code: "https://github.com/vlanzarini80-source/Lanzarini-Validation-Suite"
+
+abstract: >
+  Public validation and reproducibility framework for sparse-local attention
+  research. The project provides a transparent validation workflow covering
+  numerical correctness, runtime benchmarking, runtime stability,
+  artifact generation, public reproducibility packages and SHA-256
+  integrity verification without exposing proprietary kernel implementations.
+
+keywords:
+  - sparse attention
+  - local attention
+  - GPU
+  - Triton
+  - CUDA
+  - benchmarking
+  - reproducibility
+  - validation
+  - machine learning
+  - transformers
+
+license: MIT
+version: "1.0.0"
+date-released: "2026-07-01"
+
+url: "https://github.com/vlanzarini80-source/Lanzarini-Validation-Suite"
