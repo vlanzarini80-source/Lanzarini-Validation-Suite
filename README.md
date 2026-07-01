@@ -195,13 +195,7 @@ examples/
 
 ---
 
-## Current Validation Stages
-
-
-→ [`scripts/v1a_environment_check.py`](scripts/v1a_environment_check.py)
-→ [`scripts/v1b_adapter_contract.py`](scripts/v1b_adapter_contract.py)
-→ [`scripts/v1c_micro_correctness.py`](scripts/v1c_micro_correctness.py)
-→ [`scripts/v1d_runtime_benchmark.py`](scripts/v1d_runtime_benchmark.py)
+## Current 
 ---
 
 # Relationship to the Lanzarini Research Project
