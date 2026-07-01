@@ -1,217 +1,268 @@
-Lanzarini Validation Suite
+> **Public Validation and Reproducibility Framework for Sparse-Local Attention Research**
 
-Independent Validation and Benchmarking Framework for Sparse Local-Window Attention Kernels
-
----
-
-Overview
-
-The Lanzarini Validation Suite is an independent validation and benchmarking framework designed for sparse local-window attention kernels.
-
-The framework was developed during the experimental validation of the proprietary Lanzarini Triton kernel and later generalized into a modular validation infrastructure that can be applied to different sparse attention implementations.
-
-The objective of this repository is not to publish a new attention kernel.
-
-Instead, it provides a reproducible methodology for validating numerical correctness, runtime behavior, energy consumption and empirical backend-selection strategies.
-
-The optimized Lanzarini kernel is intentionally not included in this public repository.
+![Validation](https://img.shields.io/badge/Validation-PASS-success)
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![CUDA](https://img.shields.io/badge/CUDA-Tested-green)
+![Triton](https://img.shields.io/badge/Triton-Tested-orange)
+![Research](https://img.shields.io/badge/Research-Reproducible-blueviolet)
+![Status](https://img.shields.io/badge/Status-Active-success)
 
 ---
 
-Motivation
+# Overview
 
-GPU kernel benchmarking is significantly more complex than comparing average execution times.
+The **Lanzarini Validation Suite** is a public validation and reproducibility framework developed to rigorously evaluate sparse-local attention research.
 
-Reliable conclusions require:
+The suite provides a complete validation workflow covering:
 
-- reproducible experiments
-- numerical correctness verification
-- runtime-only measurements
-- blind validation
-- statistical analysis
-- automatic report generation
-- hardware-aware evaluation
-
-The Validation Suite was created to standardize this process.
-
----
-
-Validation Scope
-
-The current framework supports validation of:
-
-- Environment compatibility
-- Adapter contract verification
-- Numerical correctness against PyTorch SDPA local-mask
-- Runtime benchmarking
-- NVML energy benchmarking
-- Backend-selection frontier mapping
-- Automatic JSON report generation
-- Automatic CSV generation
-- SHA-256 artifact verification
-- Reproducible experiment configuration
-
----
-
-Experimental Methodology
-
-The framework follows strict engineering principles.
-
-- No hardcoded benchmark results
-- Runtime-only measured data
-- No manually selected favorable cases
-- Reproducible benchmark protocol
-- Hardware-aware evaluation
-- Blind validation whenever possible
-- Automatic report generation
-- Evidence-based conclusions only
-
-Experimental conclusions are derived exclusively from measured results.
-
----
-
-Current Experimental Status
-
-Current public validation has been performed primarily on:
-
-Hardware
-
-- NVIDIA A100-SXM4-80GB
-
-Precision
-
-- FP16
-
-Reference implementation
-
-- PyTorch SDPA Local Mask
-
-Comparison backends
-
-- Proprietary Lanzarini Kernel
-- FlashAttention
-- PyTorch SDPA
-
-The validation framework has been used to perform:
-
-- correctness validation
+- numerical correctness
 - runtime benchmarking
-- energy benchmarking
-- empirical backend frontier analysis
+- runtime stability
+- artifact generation
+- public package creation
+- SHA-256 integrity verification
+- reproducibility reporting
 
-Experimental evidence obtained on the tested configurations indicates that backend selection is better described by an empirical multi-region frontier than by a single global threshold.
-
-These observations apply only to the tested hardware, software stack and benchmark configurations.
-
-No universal performance claims are made.
-
----
-
-Validation Pipeline
-
-Environment Validation
-        │
-        ▼
-Adapter Contract Verification
-        │
-        ▼
-Numerical Correctness
-        │
-        ▼
-Runtime Benchmark
-        │
-        ▼
-Energy Benchmark
-        │
-        ▼
-Backend Frontier Analysis
-        │
-        ▼
-Automatic Reports
+The framework was designed to separate **public scientific validation** from **proprietary kernel implementations**, allowing experimental results to be independently verified without exposing private implementation details.
 
 ---
 
-Repository Structure
+# Motivation
 
-validation_suite.py
+High-performance attention kernels are often evaluated using different benchmarks, datasets and experimental methodologies, making independent comparison difficult.
 
-configs/
+The objective of this project is to provide a transparent validation workflow that documents:
 
-modules/
+- how experiments were executed;
+- how results were verified;
+- how artifacts were generated;
+- how integrity was preserved after publication.
 
-docs/
+---
 
+# Validation Pipeline
+
+The current public validation pipeline consists of thirteen validated stages.
+
+| Stage | Description | Status |
+|--------|-------------|--------|
+| V1A | Environment Check | ✅ PASS |
+| V1B | Adapter Contract Validation | ✅ PASS |
+| V1C | Micro Correctness Validation | ✅ PASS |
+| V1D | Runtime Smoke Test | ✅ PASS |
+| V1E | Artifact Manifest Generation | ✅ PASS |
+| V1F | Validation Report Generator | ✅ PASS |
+| V2A | Extended Correctness Validation | ✅ PASS |
+| V2B | Extended Runtime Benchmark | ✅ PASS |
+| V2C | Runtime Stability Audit | ✅ PASS |
+| V2D | Stable Runtime Report | ✅ PASS |
+| V3A-R | Public Package Audit | ✅ PASS |
+| V3C-R | Artifact Package Builder | ✅ PASS |
+| V3D-R | Package Integrity Verification | ✅ PASS |
+
+---
+
+# Current Validation Status
+
+Validation pipeline status:
+
+- Completed validation stages: **13**
+- Public reproducibility package generated
+- ZIP package generated
+- SHA-256 manifest generated
+- Integrity verification completed
+
+Package integrity verification results:
+
+| Item | Result |
+|------|--------|
+| Manifest rows | **70** |
+| SHA-256 verified files | **69** |
+| Self-referential manifest | **1** |
+| Missing files | **0** |
+| Size mismatches | **0** |
+| Hash mismatches | **0** |
+
+---
+
+# Repository Contents
+
+This repository contains the complete public validation infrastructure.
+
+Included:
+
+- Validation Suite source code
+- JSON reports
+- CSV reports
+- Markdown reports
+- HTML reports
+- SHA-256 manifests
+- Public reproducibility package
+- Documentation
+
+---
+
+# Repository Structure
+
+```text
+lanzarini-validation-suite/
+
+README.md
+LICENSE
+CITATION.cff
+CHANGELOG.md
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+requirements.txt
+pyproject.toml
+
+validation_suite/
+artifacts/
+reports/
 examples/
-
-results_example/
-
-private_kernel/
-
----
-
-Proprietary Components
-
-This repository intentionally excludes the proprietary Lanzarini Triton kernel.
-
-The directory
-
-private_kernel/
-
-contains only the adapter interface.
-
-Users may connect their own sparse attention implementation without modifying the validation framework.
-
-This design allows the validation methodology to remain public while preserving proprietary kernel implementations.
+docs/
+paper/
+figures/
+```
 
 ---
 
-Generated Outputs
+# Scientific Scope
 
-Typical outputs include:
+The Validation Suite validates:
+
+- numerical correctness
+- runtime measurements
+- runtime stability
+- artifact generation
+- package integrity
+- reproducibility workflow
+
+The suite does **not** attempt to validate theoretical properties of attention algorithms.
+
+---
+
+# Relationship to the Lanzarini Research Project
+
+The Validation Suite represents the **public reproducibility component** of the broader Lanzarini research project.
+
+The complete research program includes additional experimental studies on:
+
+- sparse-local attention kernels
+- backend selection
+- runtime frontiers
+- adaptive routing
+- long-context evaluation
+
+Those research components are intentionally maintained separately from this public validation repository.
+
+---
+
+# What is NOT Included
+
+This repository intentionally does **not** include:
+
+- proprietary Triton kernel implementations;
+- proprietary sparse-local attention source code;
+- proprietary routing implementations;
+- internal development notebooks;
+- private optimization code.
+
+The purpose of the repository is validation and reproducibility rather than distribution of proprietary implementations.
+
+---
+
+# Scientific Claims
+
+The Validation Suite supports claims regarding:
+
+- correctness validation;
+- benchmark execution;
+- artifact generation;
+- package integrity;
+- reproducibility.
+
+The Validation Suite does **not** support claims of:
+
+- universal superiority over FlashAttention;
+- universal superiority over SDPA;
+- universal superiority over any attention implementation;
+- performance outside experimentally evaluated configurations.
+
+Performance conclusions remain limited to the benchmark domains documented in the associated research.
+
+---
+
+# Reproducibility
+
+The project automatically produces:
 
 - JSON reports
-- CSV benchmark tables
-- validation summaries
-- frontier maps
+- CSV reports
+- Markdown reports
+- HTML reports
 - SHA-256 manifests
-- reproducible experiment artifacts
+- ZIP reproducibility packages
+
+allowing independent verification of all published public artifacts.
 
 ---
 
-Research Applications
+# Intended Audience
 
-The Validation Suite has been designed for research involving:
+The repository is intended for:
 
-- Sparse Attention
-- GPU Kernel Engineering
-- Runtime Optimization
-- Performance Benchmarking
-- Energy-aware Evaluation
-- Backend Selection
-- Reproducible AI Systems Research
-
----
-
-Collaboration
-
-Research collaborations, industrial evaluations and academic discussions are welcome.
-
-The proprietary Lanzarini kernel is available only for qualified technical evaluations under appropriate confidentiality agreements (NDA) when applicable.
+- researchers
+- machine learning engineers
+- systems researchers
+- GPU kernel developers
+- reviewers
+- reproducibility studies
 
 ---
 
-Citation
+# Future Development
 
-Citation metadata is provided through:
+Planned future work includes:
 
-CITATION.cff
-
-Future scientific publications associated with this project will be referenced here.
+- additional benchmark domains;
+- validation on additional GPU architectures;
+- expanded documentation;
+- public datasets;
+- integration with future scientific publications.
 
 ---
 
-License
+# Citation
 
-The validation framework is distributed independently from the proprietary kernel implementation.
+If this repository contributes to academic work, please cite the associated publication.
 
-See the LICENSE file for repository licensing information.
+Citation metadata will be provided through the included `CITATION.cff` file.
+
+---
+
+# License
+
+The Validation Suite is distributed under the repository license.
+
+The proprietary sparse-local attention kernel is **not** distributed as part of this repository.
+
+---
+
+# Author
+
+**Valentino Lanzarini**
+
+Independent Research Project
+
+---
+
+# Disclaimer
+
+This repository contains a public validation and reproducibility framework together with experimentally generated public artifacts.
+
+Its purpose is to improve transparency, reproducibility and independent verification of sparse-local attention research.
+
+The repository should **not** be interpreted as evidence that any attention implementation is universally superior.
+
+Experimental conclusions remain restricted to the evaluated benchmark domains documented in the associated research.
