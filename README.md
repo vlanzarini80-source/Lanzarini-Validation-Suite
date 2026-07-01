@@ -218,6 +218,14 @@ This is not intended as a full performance benchmark.
 
 **Script:** `scripts/v1d_runtime_benchmark.py`
 
+✔ **V1E — Artifact Manifest + SHA256 Audit**
+Inventories public validation artifacts, verifies expected reports exist,
+and records SHA256 hashes for integrity verification.
+This is an artifact integrity audit, not a benchmark.
+
+**Script:**
+`scripts/v1e_artifact_manifest.py`
+
 ---
 
 # Relationship to the Lanzarini Research Project
