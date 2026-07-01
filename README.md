@@ -197,22 +197,11 @@ examples/
 
 ## Current Validation Stages
 
-- ✅ **V1A — Environment Check**  
-  Verify CUDA, GPU, PyTorch, Triton and runtime environment.  
-  → [`scripts/v1a_environment_check.py`](scripts/v1a_environment_check.py)
 
-- ✅ **V1B — Private Adapter Contract Check**  
-  Verify the public adapter interface without exposing the private kernel source code.  
-  → [`scripts/v1b_adapter_contract.py`](scripts/v1b_adapter_contract.py)
-
-- ✅ **V1C — Micro Correctness Audit**  
-  Compare the private implementation against an SDPA local-window reference on small test shapes.  
-  → [`scripts/v1c_micro_correctness.py`](scripts/v1c_micro_correctness.py)
-
-- ✅ **V1D — Runtime Smoke Benchmark**  
-  Lightweight runtime benchmark for reproducible execution on small shapes. This is **not** intended as a full performance benchmark.  
-  → [`scripts/v1d_runtime_benchmark.py`](scripts/v1d_runtime_benchmark.py)
-
+→ [`scripts/v1a_environment_check.py`](scripts/v1a_environment_check.py)
+→ [`scripts/v1b_adapter_contract.py`](scripts/v1b_adapter_contract.py)
+→ [`scripts/v1c_micro_correctness.py`](scripts/v1c_micro_correctness.py)
+→ [`scripts/v1d_runtime_benchmark.py`](scripts/v1d_runtime_benchmark.py)
 ---
 
 # Relationship to the Lanzarini Research Project
