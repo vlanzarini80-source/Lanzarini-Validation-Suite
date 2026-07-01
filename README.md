@@ -27,6 +27,26 @@ The framework was designed to separate **public scientific validation** from **p
 
 ---
 
+## Validation Pipeline
+
+The Validation Suite is organized as a sequential validation workflow. Each stage verifies a specific aspect of the project before the next stage is executed, ensuring that all published artifacts are numerically correct, reproducible and integrity-verified.
+
+```text
+V1A → V1B → V1C → V1D → V1E → V1F
+                     ↓
+           V2A → V2B → V2C → V2D
+                     ↓
+          V3A-R → V3C-R → V3D-R
+```
+
+**Stage Groups**
+
+- **V1:** Environment setup, correctness validation, runtime smoke testing and artifact generation.
+- **V2:** Extended correctness evaluation, runtime benchmarking and stability analysis.
+- **V3:** Public package auditing, reproducibility package generation and SHA-256 integrity verification.
+
+```
+
 # Motivation
 
 High-performance attention kernels are often evaluated using different benchmarks, datasets and experimental methodologies, making independent comparison difficult.
