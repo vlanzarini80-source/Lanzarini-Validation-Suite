@@ -1,0 +1,14 @@
+{
+  "stage": "V1B_PRIVATE_ADAPTER_CONTRACT_CHECK",
+  "timestamp": "2026-06-30 05:00:27",
+  "private_kernel_dir": "/workspace/private_kernel",
+  "adapter_path": "/workspace/private_kernel/adapter.py",
+  "adapter_file_exists": true,
+  "funzione prevista": "selected_forward_q2",
+  "function_available": true,
+  "function_callable": true,
+  "firma": "(q, k, v, finestra)",
+  "pass_v1b": true,
+  "errori": [],
+  "strict_note": "Questa fase verifica solo il contratto dell'adattatore. Non espone né stampa il codice sorgente privato del kernel."
+}
