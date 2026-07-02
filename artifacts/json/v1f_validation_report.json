@@ -1,0 +1,17 @@
+{
+  "stage": "V1F_VALIDATION_REPORT_GENERATOR",
+  "timestamp": "2026-06-30 19:46:03",
+  "root": "/workspace/lanzarini_validation_suite_v1",
+  "missing_inputs": [],
+  "all_pass_v1a_to_v1e": true,
+  "report_markdown": "/workspace/lanzarini_validation_suite_v1/results/reports/validation_suite_v1_report.md",
+  "report_html": "/workspace/lanzarini_validation_suite_v1/results/reports/validation_suite_v1_report.html",
+  "stage_status": {
+    "V1A": true,
+    "V1B": true,
+    "V1C": true,
+    "V1D": true,
+    "V1E": true
+  },
+  "strict_note": "V1F generates a report from public validation artifacts only. It does not import, read, hash, or expose private kernel source code."
+}
