@@ -1,0 +1,29 @@
+{
+  "stage": "V1E_ARTIFACT_MANIFEST_SHA256_AUDIT",
+  "timestamp": "2026-06-30 05:16:29",
+  "root": "/workspace/lanzarini_validation_suite_v1",
+  "results_dir": "/workspace/lanzarini_validation_suite_v1/results",
+  "manifest_json": "/workspace/lanzarini_validation_suite_v1/results/json/v1e_artifact_manifest.json",
+  "manifest_csv": "/workspace/lanzarini_validation_suite_v1/results/csv/v1e_artifact_manifest.csv",
+  "expected_files": [
+    "/workspace/lanzarini_validation_suite_v1/results/json/v1a_environment_report.json",
+    "/workspace/lanzarini_validation_suite_v1/results/json/v1b_adapter_contract_report.json",
+    "/workspace/lanzarini_validation_suite_v1/results/json/v1c_micro_correctness_report.json",
+    "/workspace/lanzarini_validation_suite_v1/results/json/v1d_runtime_smoke_report.json",
+    "/workspace/lanzarini_validation_suite_v1/results/csv/v1c_micro_correctness_rows.csv",
+    "/workspace/lanzarini_validation_suite_v1/results/csv/v1c_micro_correctness_errors.csv",
+    "/workspace/lanzarini_validation_suite_v1/results/csv/v1d_runtime_smoke_rows.csv",
+    "/workspace/lanzarini_validation_suite_v1/results/csv/v1d_runtime_smoke_errors.csv"
+  ],
+  "missing_expected": [],
+  "unexpected_private_exposure": [],
+  "n_artifacts": 23,
+  "artifact_types": [
+    "csv",
+    "json"
+  ],
+  "total_size_bytes": 279401,
+  "sha256_algorithm": "SHA256",
+  "pass_v1e": true,
+  "strict_note": "V1E verifies that expected public artifacts exist and records SHA256 hashes. This is an integrity audit, not a benchmark. Private kernel source is excluded."
+}
