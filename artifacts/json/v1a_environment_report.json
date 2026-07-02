@@ -1,0 +1,26 @@
+{
+  "stage": "V1A_ENVIRONMENT_ADAPTER_CHECK",
+  "timestamp": "2026-06-30 19:33:24",
+  "python": "3.11.10",
+  "piattaforma": "Linux-6.8.0-124-generic-x86_64-with-glibc2.35",
+  "cuda_available": true,
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "torcia": "2.4.1+cu124",
+  "triton": "3.0.0",
+  "flash_attn": "2.8.3.post1",
+  "selected_forward_q2_available": false,
+  "selected_forward_q2_callable": false,
+  "nvidia_smi": {
+    "ok": vero,
+    "output": "Tue Jun 30 19:33:24 2026 \n+-----------------------------------------------------------------------------------------+\n| NVIDIA-SMI 580.159.04 Driver Version: 580.159.04 CUDA Version: 13.0 |\n+-----------------------------------------+------------------------+----------------------+\n| GPU Name Persistence-M | Bus-Id Disp.A | Volatile Uncorr. ECC |\n| Fan Temp Perf Pwr:Usage/Cap | Memory-Usage | GPU-Util Compute M. |\n| | | MIG M. |\n|==========================================+========================+======================|\n| 0 NVIDIA A100-SXM4-80GB On | 00000000:87:00.0 Off | 0 |\n| N/D 36C P0 86W / 400W | 1623MiB / 81920MiB | 0% Predefinito |\n| | | Disabilitato |\n+-----------------------------------------+------------------------+----------------------+\n\n+-----------------------------------------------------------------------------------------+\n| Processi: |\n| GPU GI CI PID Tipo Nome processo Memoria GPU |\n| ID ID Utilizzo |\n|===========================================================================================|\n| 0 N/AN/A 2859 C /usr/bin/python 1614MiB |\n+-----------------------------------------------------------------------------------------+"
+  },
+  "pass_v1a": true,
+  "errori": [],
+  "strict_note": "V1A verifica l'ambiente CUDA/PyTorch/Triton e la disponibilità dell'adattatore. Non esegue alcun benchmark e non espone il codice sorgente privato del kernel.",
+  "cuda_device_count": 1,
+  "cuda_version_torch": "12.4",
+  "cuda_capability": [
+    8,
+    0
+  ]
+}
