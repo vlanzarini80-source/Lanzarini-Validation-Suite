@@ -1,0 +1,41 @@
+{
+  "stage": "V1C_LITE_RUNTIME",
+  "suite": "Lanzarini Validation Suite v1.0",
+  "timestamp_utc": "2026-06-29 16:48:05 UTC",
+  "dispositivo": "NVIDIA A100-SXM4-80GB",
+  "torcia": "2.4.1+cu124",
+  "flash_available": true,
+  "backend": [
+    "Lanzarini",
+    "SDPA_local_mask",
+    "FlashAttention_window"
+  ],
+  "dtype": "torch.float16",
+  "B": 1,
+  "H": 4,
+  "D": 64,
+  "T_grid": [
+    2048,
+    4096,
+    8192
+  ],
+  "W_grid": [
+    64,
+    128,
+    256
+  ],
+  "semi": [
+    0,
+    1
+  ],
+  "riscaldamento": 20,
+  "corse": 100,
+  "n_righe": 54,
+  "n_righe_valide": 54,
+  "n_errors": 0,
+  "winner_counts": {
+    "Lanzarini": 54
+  },
+  "elapsed_s": 37.70713663101196,
+  "pass_v1c_lite": true
+}
