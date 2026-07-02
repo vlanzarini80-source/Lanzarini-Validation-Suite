@@ -1,9 +1,9 @@
 {
   "stage": "V1C_MICRO_CORRECTNESS_AUDIT",
   "timestamp": "2026-06-30 05:04:58",
-  "dispositivo": "cuda",
+  "device": "cuda",
   "gpu": "NVIDIA A100-SXM4-80GB",
-  "torcia": "2.4.1+cu124",
+  "torch": "2.4.1+cu124",
   "dtype": "torch.float16",
   "B": 1,
   "H": 4,
@@ -19,22 +19,22 @@
     64,
     128
   ],
-  "SEMI": [
+  "SEEDS": [
     101,
     102,
     103
   ],
-  "REL_TOL": 0,001,
-  "COS_TOL": 0,999,
-  "n_righe": 33,
+  "REL_TOL": 0.001,
+  "COS_TOL": 0.999,
+  "n_rows": 33,
   "n_pass": 33,
   "n_fail": 0,
   "n_errors": 0,
-  "max_abs_max": 0,0009765625,
-  "relative_l2_max": 0,000148372362734714,
-  "cos_min": 0,9999998807907104,
+  "max_abs_max": 0.0009765625,
+  "relative_l2_max": 0.000148372362734714,
+  "cos_min": 0.9999998807907104,
   "pass_v1c": true,
-  "strict_note": "V1C confronta selected_forward_q2 con un riferimento SDPA local-window solo su forme di piccole dimensioni. Non esegue alcun benchmark di velocità e non espone il codice sorgente privato del kernel.",
+  "strict_note": "V1C compares selected_forward_q2 against an SDPA local-window reference on small shapes only. It performs no speed benchmark and does not expose private kernel source code.",
   "rows_csv": "/workspace/lanzarini_validation_suite_v1/results/csv/v1c_micro_correctness_rows.csv",
   "errors_csv": "/workspace/lanzarini_validation_suite_v1/results/csv/v1c_micro_correctness_errors.csv"
 }
