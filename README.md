@@ -197,34 +197,36 @@ examples/
 
 ## Current Validation Stages
 
-✔ **V1A — Environment Check**
-Verifies CUDA, GPU, PyTorch, Triton and runtime environment.
+| Stage | Status | Purpose | Script |
+|---|---:|---|---|
+| V1A | ✅ Published | Environment check: CUDA, GPU, PyTorch, Triton and runtime environment. | `scripts/v1a_environment_check.py` |
+| V1B | ✅ Published | Private adapter contract check without exposing private kernel source code. | `scripts/v1b_adapter_contract.py` |
+| V1C | ✅ Published | Micro correctness audit against SDPA local-window reference on small shapes. | `scripts/v1c_micro_correctness.py` |
+| V1D | ✅ Published | Runtime smoke benchmark for reproducible execution on small shapes. Not a full benchmark. | `scripts/v1d_runtime_benchmark.py` |
+| V1E | ✅ Published | Artifact manifest and SHA256 integrity audit for public validation artifacts. | `scripts/v1e_artifact_manifest.py` |
+| V1F | ✅ Published | Generates Markdown, HTML and JSON summary reports from public validation artifacts. | `scripts/v1f_report_generator.py` |
 
-**Script:** `scripts/v1a_environment_check.py`
+## How to Run
 
-✔ **V1B — Private Adapter Contract Check**
-Verifies the public adapter interface without exposing the private kernel source code.
+Run the stages from the repository root:
 
-**Script:** `scripts/v1b_adapter_contract.py`
+```bash
+python scripts/v1a_environment_check.py
+python scripts/v1b_adapter_contract.py
+python scripts/v1c_micro_correctness.py
+python scripts/v1d_runtime_benchmark.py
+python scripts/v1e_artifact_manifest.py
+python scripts/v1f_report_generator.py
 
-✔ **V1C — Micro Correctness Audit**
-Compares the private implementation against an SDPA local-window reference on small test shapes.
+The scripts write public outputs to:
 
-**Script:** `scripts/v1c_micro_correctness.py`
+```text
+results/json/
+results/csv/
+results/reports/
+```
 
-✔ **V1D — Runtime Smoke Benchmark**
-Runs a lightweight runtime benchmark to verify reproducible execution on small shapes.
-This is not intended as a full performance benchmark.
-
-**Script:** `scripts/v1d_runtime_benchmark.py`
-
-✔ **V1E — Artifact Manifest + SHA256 Audit**
-Inventories public validation artifacts, verifies expected reports exist,
-and records SHA256 hashes for integrity verification.
-This is an artifact integrity audit, not a benchmark.
-
-**Script:**
-`scripts/v1e_artifact_manifest.py`
+The private kernel implementation is not included in this repository. The public scripts use an adapter interface and do not expose private source code.
 
 ---
 
