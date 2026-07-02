@@ -4,11 +4,11 @@
   "private_kernel_dir": "/workspace/private_kernel",
   "adapter_path": "/workspace/private_kernel/adapter.py",
   "adapter_file_exists": true,
-  "funzione prevista": "selected_forward_q2",
+  "expected_function": "selected_forward_q2",
   "function_available": true,
   "function_callable": true,
-  "firma": "(q, k, v, finestra)",
+  "signature": "(q, k, v, window)",
   "pass_v1b": true,
-  "errori": [],
-  "strict_note": "Questa fase verifica solo il contratto dell'adattatore. Non espone né stampa il codice sorgente privato del kernel."
+  "errors": [],
+  "strict_note": "This stage checks only the adapter contract. It does not expose or print private kernel source code."
 }
