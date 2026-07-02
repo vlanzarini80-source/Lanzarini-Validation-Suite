@@ -1,0 +1,70 @@
+{
+  "stage": "V1F_FAST_FRONTIER",
+  "suite": "Lanzarini Validation Suite v1.0",
+  "timestamp_utc": "2026-06-29 17:14:37 UTC",
+  "dispositivo": "NVIDIA A100-SXM4-80GB",
+  "torcia": "2.4.1+cu124",
+  "dtype": "torch.float16",
+  "B": 1,
+  "H": 4,
+  "D": 64,
+  "T_grid": [
+    8192,
+    12288,
+    16384,
+    20480,
+    24576
+  ],
+  "W_grid": [
+    64,
+    128,
+    256,
+    512
+  ],
+  "semi": [
+    0
+  ],
+  "riscaldamento Passa 3,
+  "esegue": 8,
+  "n_righe": 40,
+  "n_errors": 0,
+  "n_vincitori": 20,
+  "winner_counts": {
+    "Lanzarini": 16,
+    "FlashAttention": 4
+  },
+  "elapsed_s": 9.312972784042358,
+  "mappa_di_frontiera": {
+    "8192": {
+      "64": "Lanzarini",
+      "128": "Lanzarini",
+      "256": "Lanzarini",
+      "512" Lanciarini"
+    },
+    "12288": {
+      "64": "Lanzarini",
+      "128": "Lanzarini",
+      "256": "Lanzarini",
+      "512": "FlashAttention"
+    },
+    "16384 Giochi {
+      "64": "Lanzarini",
+      "128": "Lanzarini",
+      "256": "Lanzarini",
+      "512": "FlashAttention"
+    },
+    "20480": {
+      "64": "Lanzarini",
+      "128": "Lanzarini",
+      "256": "Lanzarini",
+      "512": "FlashAttention"
+    },
+    "24576": {
+      "64": "Lanzarini",
+      "128": "Lanzarini",
+      "256": "Lanzarini",
+      "512": "FlashAttention"
+    }
+  },
+  "pass_v1f_fast": true
+}
