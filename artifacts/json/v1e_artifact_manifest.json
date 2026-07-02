@@ -1,0 +1,223 @@
+{
+  "stage": "V1E_ARTIFACT_MANIFEST_SHA256",
+  "timestamp": "2026-06-30 05:16:29",
+  "root": "/workspace/lanzarini_validation_suite_v1",
+  "scan_dirs": [
+    "/workspace/lanzarini_validation_suite_v1/results/json",
+    "/workspace/lanzarini_validation_suite_v1/results/csv"
+  ],
+  "prefissi_percorso_esclusi": [
+    "/workspace/private_kernel"
+  ],
+  "n_artifacts": 23,
+  "manufatti": [
+    {
+      "relative_path": "results/json/v1a_environment_report.json",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/json/v1a_environment_report.json",
+      "tipo": "json",
+      "size_bytes": 4436,
+      "mtime_unix": 1782745121.0,
+      "mtime_readable": "2026-06-29 14:58:41",
+      "sha256": "e9bfbe6f49fd1b90d64a83af91f8bb51800cb1e6e98374bad2916a45953469a0"
+    },
+    {
+      "relative_path": "results/json/v1b_adapter_contract_report.json",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/json/v1b_adapter_contract_report.json",
+      "tipo": "json",
+      "size_bytes": 529,
+      "mtime_unix": 1782795627.0,
+      "mtime_readable": "2026-06-30 05:00:27",
+      "sha256": "fb120c2a4a3611f30ccd86ed29e1410fe7c4d10ef5d96a3e84df77769f1f08e7"
+    },
+    {
+      "relative_path": "results/json/v1b_r_correctness_report.json",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/json/v1b_r_correctness_report.json",
+      "tipo": "json",
+      "size_bytes": 916,
+      "mtime_unix": 1782745525.0,
+      "mtime_readable": "2026-06-29 15:05:25",
+      "sha256": "aa0bd2453bea720a8f4fc8faa06b36a1f7bf12e54da8f6e98825cd8bc448b024"
+    },
+    {
+      "relative_path": "results/json/v1c_lite_runtime_report.json",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/json/v1c_lite_runtime_report.json",
+      "tipo": "json",
+      "size_bytes": 677,
+      "mtime_unix": 1782751685.0,
+      "mtime_readable": "2026-06-29 16:48:05",
+      "sha256": "1508fa97096549ba56f200834a2a2567acc5601182b63cd2cff662cb31f9f752"
+    },
+    {
+      "relative_path": "results/json/v1c_micro_correctness_report.json",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/json/v1c_micro_correctness_report.json",
+      "tipo": "json",
+      "size_bytes": 991,
+      "mtime_unix": 1782795898.0,
+      "mtime_readable": "2026-06-30 05:04:58",
+      "sha256": "972b5203846482e2db0805bac51cd6de391c4e3a60a599b5ff828de0092efb01"
+    },
+    {
+      "relative_path": "results/json/v1d_lite_energy_report.json",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/json/v1d_lite_energy_report.json",
+      "tipo": "json",
+      "size_bytes": 936,
+      "mtime_unix": 1782751901.0,
+      "mtime_readable": "2026-06-29 16:51:41",
+      "sha256": "1eef040a2e9d785f0d7436d3b6f5558c874d224812c4b4a21d62d0f0a328fdd2"
+    },
+    {
+      "relative_path": "results/json/v1d_runtime_smoke_report.json",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/json/v1d_runtime_smoke_report.json",
+      "tipo": "json",
+      "size_bytes": 1261,
+      "mtime_unix": 1782796400.0,
+      "mtime_readable": "2026-06-30 05:13:20",
+      "sha256": "ae7b49ece0e1ec2853fa52ae419aa75459d464de572e841f9c658d2b108a8a56"
+    },
+    {
+      "relative_path": "results/json/v1f_fast_frontier_report.json",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/json/v1f_fast_frontier_report.json",
+      "tipo": "json",
+      "size_bytes": 1270,
+      "mtime_unix": 1782753277.0,
+      "mtime_readable": "2026-06-29 17:14:37",
+      "sha256": "ccaebaaecc5443a487f5f7c94092eb3aff373fafe399e7b38e816f567f9ad4c1"
+    },
+    {
+      "relative_path": "results/json/v1f_r_frontier_report.json",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/json/v1f_r_frontier_report.json",
+      "tipo": "json",
+      "size_bytes": 5656,
+      "mtime_unix": 1782752965.0,
+      "mtime_readable": "2026-06-29 17:09:25",
+      "sha256": "675aba243ac4924fbb758260b1becec89f7d7362ac6437096072e8a6c9a9225f"
+    },
+    {
+      "relative_path": "results/csv/v1b_r_correctness_errors.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1b_r_correctness_errors.csv",
+      "tipo": "csv",
+      "size_bytes": 13,
+      "mtime_unix": 1782745525.0,
+      "mtime_readable": "2026-06-29 15:05:25",
+      "sha256": "52fa136419d5b43a560cb7997bf754158c37ed4d7565d29968997c75a9e26974"
+    },
+    {
+      "relative_path": "results/csv/v1b_r_correctness_rows.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1b_r_correctness_rows.csv",
+      "tipo": "csv",
+      "size_bytes": 6785,
+      "mtime_unix": 1782745525.0,
+      "mtime_readable": "2026-06-29 15:05:25",
+      "sha256": "f44e0fd19d727f992125a535bf190fe2870f976fdea4aa02d439f2495b4086e3"
+    },
+    {
+      "relative_path": "results/csv/v1c_lite_runtime_errors.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1c_lite_runtime_errors.csv",
+      "tipo": "csv",
+      "size_bytes": 13,
+      "mtime_unix": 1782751685.0,
+      "mtime_readable": "2026-06-29 16:48:05",
+      "sha256": "52fa136419d5b43a560cb7997bf754158c37ed4d7565d29968997c75a9e26974"
+    },
+    {
+      "relative_path": "results/csv/v1c_lite_runtime_rows.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1c_lite_runtime_rows.csv",
+      "tipo": "csv",
+      "size_bytes": 15782,
+      "mtime_unix": 1782751685.0,
+      "mtime_readable": "2026-06-29 16:48:05",
+      "sha256": "4110c2b675ac06e0fad592a69e8230716222e1a09b72fb7262963cf184fe1866"
+    },
+    {
+      "relative_path": "results/csv/v1c_micro_correctness_errors.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1c_micro_correctness_errors.csv",
+      "tipo": "csv",
+      "size_bytes": 26,
+      "mtime_unix": 1782795898.0,
+      "mtime_readable": "2026-06-30 05:04:58",
+      "sha256": "69d9fbe6a190255770687e53f19963d2e18ef53fed368bb2a7cf3c649bd05dab"
+    },
+    {
+      "relative_path": "results/csv/v1c_micro_correctness_rows.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1c_micro_correctness_rows.csv",
+      "tipo": "csv",
+      "size_bytes": 4642,
+      "mtime_unix": 1782795898.0,
+      "mtime_readable": "2026-06-30 05:04:58",
+      "sha256": "dbe06cabbc575f937c5b84e108139c53fa5f9a2496adb697439613e52c03559f"
+    },
+    {
+      "relative_path": "results/csv/v1d_lite_energy_errors.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1d_lite_energy_errors.csv",
+      "tipo": "csv",
+      "size_bytes": 13,
+      "mtime_unix": 1782751901.0,
+      "mtime_readable": "2026-06-29 16:51:41",
+      "sha256": "52fa136419d5b43a560cb7997bf754158c37ed4d7565d29968997c75a9e26974"
+    },
+    {
+      "relative_path": "results/csv/v1d_lite_energy_rows.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1d_lite_energy_rows.csv",
+      "tipo": "csv",
+      "size_bytes": 18251,
+      "mtime_unix": 1782751901.0,
+      "mtime_readable": "2026-06-29 16:51:41",
+      "sha256": "81c8e097f91fe4e64c585eed0c83a24551587a62c58db82f291b79710cc3b1ba"
+    },
+    {
+      "relative_path": "results/csv/v1d_runtime_smoke_errors.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1d_runtime_smoke_errors.csv",
+      "tipo": "csv",
+      "size_bytes": 26,
+      "mtime_unix": 1782796400.0,
+      "mtime_readable": "2026-06-30 05:13:20",
+      "sha256": "69d9fbe6a190255770687e53f19963d2e18ef53fed368bb2a7cf3c649bd05dab"
+    },
+    {
+      "relative_path": "results/csv/v1d_runtime_smoke_rows.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1d_runtime_smoke_rows.csv",
+      "tipo": "csv",
+      "size_bytes": 4430,
+      "mtime_unix": 1782796400.0,
+      "mtime_readable": "2026-06-30 05:13:20",
+      "sha256": "87b27e4c43bf57917439be915d6402eccb6475064f59471f0ccf40525b81abc7"
+    },
+    {
+      "relative_path": "results/csv/v1f_fast_frontier_errors.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1f_fast_frontier_errors.csv",
+      "tipo": "csv",
+      "size_bytes": 13,
+      "mtime_unix": 1782753277.0,
+      "mtime_readable": "2026-06-29 17:14:37",
+      "sha256": "52fa136419d5b43a560cb7997bf754158c37ed4d7565d29968997c75a9e26974"
+    },
+    {
+      "relative_path": "results/csv/v1f_fast_frontier_rows.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1f_fast_frontier_rows.csv",
+      "tipo": "csv",
+      "size_bytes": 12012,
+      "mtime_unix": 1782753277.0,
+      "mtime_readable": "2026-06-29 17:14:37",
+      "sha256": "a496a27f59fe3a58933d5399f8245f1e8bb41236d17372ed2e9b349ea965dab8"
+    },
+    {
+      "relative_path": "results/csv/v1f_r_frontier_errors.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1f_r_frontier_errors.csv",
+      "tipo": "csv",
+      "size_bytes": 51566,
+      "mtime_unix": 1782752966.0,
+      "mtime_readable": "2026-06-29 17:09:26",
+      "sha256": "9a42b9604d9fa4b468e0021429557195b1bf3421d65e10cb8dc817cc06676412"
+    },
+    {
+      "relative_path": "results/csv/v1f_r_frontier_rows.csv",
+      "absolute_path": "/workspace/lanzarini_validation_suite_v1/results/csv/v1f_r_frontier_rows.csv",
+      "tipo": "csv",
+      "size_bytes": 149157,
+      "mtime_unix": 1782752966.0,
+      "mtime_readable": "2026-06-29 17:09:26",
+      "sha256": "3635dc3ecefece0831be2ee8773046aac82ae50a4d4b9efba23dc9bf631c40b8"
+    }
+  ],
+  "strict_note": "V1E inventaria solo gli artefatti pubblici della suite di validazione e calcola gli hash SHA256. Le directory private del kernel sono escluse e il codice sorgente privato del kernel non viene letto né esposto."
+}
