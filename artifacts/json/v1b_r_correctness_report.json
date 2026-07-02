@@ -1,0 +1,45 @@
+{
+  "stage": "V1B_R_CORRECTNESS_AUDIT",
+  "suite": "Lanzarini Validation Suite v1.0",
+  "timestamp_utc": "2026-06-29 15:05:25 UTC",
+  "dispositivo": "NVIDIA A100-SXM4-80GB",
+  "torcia": "2.4.1+cu124",
+  "kernel_name": "selected_forward_q2",
+  "kernel_signature": "(q, k, v, window)",
+  "detected_call_pattern": "positional_window",
+  "dtype": "torch.float16",
+  "B": 1,
+  "H": 4,
+  "D": 64,
+  "T_grid": [
+    1024,
+    2048,
+    4096
+  ],
+  "W_grid": [
+    64,
+    128,
+    256
+  ],
+  "semi": [
+    0,
+    1,
+    2
+  ],
+  "tolleranze": {
+    "atol": 0,002,
+    "rtol": 0,002,
+    "relative_l2_max_allowed": 0,005,
+    "cos_min_allowed": 0,999
+  },
+  "n_righe": 27,
+  "n_pass": 27,
+  "n_fail": 0,
+  "n_errors": 0,
+  "elapsed_s": 12.391262769699097,
+  "pass_v1b_r": true,
+  "max_abs_max": 0,0009765625,
+  "mean_abs_max": 9.702460374683142e-06,
+  "relative_l2_max": 0,0001925159493029039,
+  "cosine_min": 0,9999998807907104
+}
