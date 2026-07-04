@@ -2,9 +2,11 @@
 
 ## Purpose
 
-The Lanzarini Validation Suite is a research-oriented project focused on reproducibility, validation and transparent experimental reporting.
+The **Lanzarini Validation Suite** is a research-oriented project dedicated to scientific validation, reproducibility and transparent experimental reporting.
 
-This Code of Conduct defines expectations for respectful and constructive participation in the project.
+This Code of Conduct defines the expected standards of behavior for everyone participating in the project.
+
+The goal is to maintain a respectful, collaborative and scientifically rigorous environment.
 
 ---
 
@@ -12,51 +14,69 @@ This Code of Conduct defines expectations for respectful and constructive partic
 
 Participants are expected to:
 
-- communicate respectfully;
+- communicate respectfully and professionally;
 - discuss technical disagreements constructively;
-- focus on evidence, reproducibility and scientific clarity;
-- avoid personal attacks;
+- focus discussions on evidence, reproducibility and scientific clarity;
+- respect different technical opinions;
 - respect intellectual property and proprietary implementation boundaries;
-- avoid unsupported or exaggerated technical claims.
+- distinguish measured results from interpretation;
+- help improve the quality and reproducibility of the project.
 
 ---
 
 ## Unacceptable Behavior
 
-Unacceptable behavior includes:
+The following behaviors are not acceptable:
 
-- harassment or abusive language;
-- personal attacks;
+- harassment, discrimination or abusive language;
+- personal attacks or hostile communication;
 - publishing confidential or proprietary implementation details without permission;
 - deliberately misrepresenting benchmark results;
 - submitting fabricated or unsupported experimental claims;
-- attempting to weaken reproducibility or artifact integrity.
+- intentionally weakening reproducibility or artifact integrity;
+- disrupting constructive technical discussions.
 
 ---
 
 ## Research Integrity
 
-This project prioritizes rigorous experimental reporting.
+Scientific integrity is a fundamental principle of this project.
 
-Contributors should clearly distinguish:
+Contributors should clearly distinguish between:
 
-- measured results;
+- measured experimental results;
 - derived analysis;
 - interpretation;
-- speculation.
+- future work or speculation.
 
-Claims should remain limited to experimentally supported evidence.
+Scientific claims should remain limited to experimentally supported evidence.
 
 ---
 
 ## Enforcement
 
-Project maintainers may remove comments, issues, pull requests or contributions that violate this Code of Conduct.
+Project maintainers may edit, remove or reject issues, pull requests, comments or other contributions that violate this Code of Conduct.
 
-Repeated or serious violations may result in being blocked from participating in the repository.
+Serious or repeated violations may result in temporary or permanent restriction from participating in the repository.
+
+---
+
+## Scope
+
+This Code of Conduct applies to:
+
+- GitHub issues;
+- pull requests;
+- repository discussions;
+- documentation contributions;
+- any other public interactions directly related to this repository.
 
 ---
 
 ## Contact
 
-For concerns related to this Code of Conduct, contact the repository maintainer through GitHub.
+Questions or concerns regarding this Code of Conduct may be raised by opening a GitHub issue or by contacting the repository maintainer.
+
+---
+
+Thank you for helping maintain a professional, respectful and scientifically rigorous research community.
