@@ -1,0 +1,44 @@
+name: Validation Suite Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          fi
+
+      - name: Check required files
+        run: |
+          test -f README.md
+          test -f LICENSE
+          test -f CITATION.cff
+          test -f scripts/v1a_environment_check.py
+          test -f scripts/v1b_adapter_contract.py
+          test -f scripts/v1c_micro_correctness.py
+          test -f scripts/v1d_runtime_benchmark.py
+          test -f scripts/v1e_artifact_manifest.py
+          test -f scripts/v1f_report_generator.py
+
+      - name: Repository structure OK
+        run: echo "Validation Suite structure verified successfully."
