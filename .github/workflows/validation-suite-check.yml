@@ -28,16 +28,46 @@ jobs:
             pip install -r requirements.txt
           fi
 
-      - name: Debug repository structure
+      - name: Check repository files
         run: |
-          echo "Current directory:"
-          pwd
-          echo ""
-          echo "Repository contents:"
-          ls -la
-          echo ""
-          echo "Recursive tree (depth 3):"
-          find . -maxdepth 3
+          test -f README.md
+          test -f LICENSE
+          test -f CITATION.cff
+          test -f CHANGELOG.md
+          test -f CONTRIBUTING.md
+          test -f CODE_OF_CONDUCT.md
+          test -f SECURITY.md
+          test -f requirements.txt
+          test -f pyproject.toml
 
-      - name: Repository structure OK
-        run: echo "Validation Suite structure inspected successfully."
+      - name: Check repository directories
+        run: |
+          test -d scripts
+          test -d artifacts
+          test -d docs
+          test -d examples
+          test -d figures
+          test -d json
+          test -d paper
+          test -d reports
+
+      - name: Check validation scripts
+        run: |
+          test -f scripts/scripts/v1a_environment_check.py
+          test -f scripts/scripts/v1b_adapter_contract.py
+          test -f scripts/scripts/v1c_micro_correctness.py
+          test -f scripts/scripts/v1d_runtime_benchmark.py
+          test -f scripts/scripts/v1e_artifact_manifest.py
+          test -f scripts/scripts/v1f_report_generator.py
+
+      - name: Python syntax check
+        run: |
+          python -m py_compile scripts/scripts/v1a_environment_check.py
+          python -m py_compile scripts/scripts/v1b_adapter_contract.py
+          python -m py_compile scripts/scripts/v1c_micro_correctness.py
+          python -m py_compile scripts/scripts/v1d_runtime_benchmark.py
+          python -m py_compile scripts/scripts/v1e_artifact_manifest.py
+          python -m py_compile scripts/scripts/v1f_report_generator.py
+
+      - name: Validation Suite structure OK
+        run: echo "Validation Suite repository structure verified successfully."
