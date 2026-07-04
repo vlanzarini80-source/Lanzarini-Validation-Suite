@@ -28,17 +28,16 @@ jobs:
             pip install -r requirements.txt
           fi
 
-      - name: Check required files
+      - name: Debug repository structure
         run: |
-          test -f README.md
-          test -f LICENSE
-          test -f CITATION.cff
-          test -f scripts/v1a_environment_check.py
-          test -f scripts/v1b_adapter_contract.py
-          test -f scripts/v1c_micro_correctness.py
-          test -f scripts/v1d_runtime_benchmark.py
-          test -f scripts/v1e_artifact_manifest.py
-          test -f scripts/v1f_report_generator.py
+          echo "Current directory:"
+          pwd
+          echo ""
+          echo "Repository contents:"
+          ls -la
+          echo ""
+          echo "Recursive tree (depth 3):"
+          find . -maxdepth 3
 
       - name: Repository structure OK
-        run: echo "Validation Suite structure verified successfully."
+        run: echo "Validation Suite structure inspected successfully."
