@@ -1,50 +1,75 @@
 # Roadmap
 
-## Current Status (v1.0)
+## Vision
 
-The Lanzarini Validation Suite currently provides:
+The Lanzarini Validation Suite is developed as a public validation and reproducibility framework for sparse-local attention research.
 
-- Public validation framework
-- Reproducibility pipeline
-- Environment verification
-- Adapter contract validation
-- Micro correctness auditing
-- Runtime smoke benchmarking
-- Artifact manifest generation
-- Automatic validation report generation
-- GitHub Actions continuous integration
-- Public documentation
-- MIT licensed repository
+The public repository focuses on transparent scientific validation while keeping proprietary implementation details private.
 
 ---
 
-## Short-Term Goals
+# Version 1 — Completed
 
-- Expand public validation reports
-- Improve automated testing
-- Increase documentation coverage
-- Add reproducibility examples
-- Improve benchmark reporting
+Version 1 established the public repository foundation.
+
+Completed milestones include:
+
+- repository organization;
+- public documentation;
+- README;
+- project roadmap;
+- project status documentation;
+- changelog;
+- contribution guidelines;
+- code of conduct;
+- security policy;
+- citation metadata;
+- artifact organization;
+- GitHub Actions continuous integration;
+- public Release v1.0.0.
+
+Status: **Completed**
 
 ---
 
-## Mid-Term Goals
+# Version 2 — In Progress
 
-- Additional validation stages
-- Multi-platform validation
-- Extended benchmark datasets
-- Reproducibility improvements
-- Automated artifact publication
+Current objectives include:
+
+- validation planning;
+- structured validation reports;
+- improved reproducibility documentation;
+- artifact traceability;
+- documentation improvements;
+- repository quality improvements;
+- additional GitHub Actions checks.
+
+Status: **In Progress**
+
+Only experimentally verified work will be marked as completed.
 
 ---
 
-## Long-Term Vision
+# Version 3 — Future Work
 
-The long-term objective is to provide an open scientific validation framework for sparse-local attention research that emphasizes:
+Possible future directions include:
 
-- transparency
-- reproducibility
-- independent verification
-- experimental integrity
+- additional benchmark domains;
+- validation on additional GPU architectures;
+- expanded reproducibility packages;
+- public scientific publications;
+- long-term repository maintenance.
 
-The repository intentionally separates the public validation framework from proprietary implementation details.
+Status: **Planned**
+
+---
+
+# Guiding Principle
+
+Public documentation should distinguish clearly between:
+
+- completed milestones;
+- work in progress;
+- planned future work.
+
+Only experimentally verified results should be presented as completed.
