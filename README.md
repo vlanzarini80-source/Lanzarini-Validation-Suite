@@ -132,6 +132,19 @@ Each stage produces public artifacts that are stored inside the repository and c
 | V1E | Artifact manifest and SHA-256 integrity audit | ✅ Published |
 | V1F | Automatic validation report generation | ✅ Published |
 
+
+## Current Development Status
+
+**Version 1 — Completed**
+
+Version 1 established the public validation framework, documentation, reproducibility pipeline, and continuous integration.
+
+**Version 2 — In Progress**
+
+Current work focuses on extending validation planning, structured reporting, reproducibility documentation, artifact traceability, and repository quality.
+
+Only experimentally verified work is presented as completed.
+
 ---
 
 # Stage Descriptions
@@ -362,15 +375,20 @@ Current public release:
 
 **Version 1.0.0**
 
-Current status:
+Current development phase:
 
-- ✅ Public validation workflow available
-- ✅ Validation artifacts published
-- ✅ SHA-256 integrity verification implemented
-- ✅ Documentation available
-- ✅ Public repository active
+- ✅ Version 1 — Completed
+- 🚧 Version 2 — In Progress
 
-Future releases will expand the validation suite with additional publicly reproducible validation stages.
+Current repository capabilities:
+
+- public validation workflow;
+- validation artifacts;
+- reproducibility documentation;
+- SHA-256 integrity verification;
+- GitHub Actions continuous integration.
+
+Future releases will extend the Validation Suite through additional publicly reproducible validation stages and documentation.
 
 ---
 
@@ -379,6 +397,18 @@ Future releases will expand the validation suite with additional publicly reprod
 If this repository contributes to academic work, please cite the associated publication when available.
 
 Citation metadata is maintained through the included `CITATION.cff` file.
+
+---
+
+# Guiding Principle
+
+Every public statement in this repository is evidence-based.
+
+Measured results are clearly separated from planned work.
+
+Future work is explicitly identified as future work.
+
+Only experimentally verified results are presented as completed. 
 
 ---
 
