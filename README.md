@@ -10,6 +10,36 @@
 
 ---
 
+## Current Status
+
+**Repository status:** Stable
+
+### Public Validation Progress
+
+| Validation Stage | Status |
+|------------------|--------|
+| V1 | ✅ Complete |
+| V2 | ✅ Complete |
+| V3 | ✅ Complete |
+
+### Current Repository Features
+
+- ✅ Public validation reports
+- ✅ Reproducibility documentation
+- ✅ Artifact package builder
+- ✅ Package integrity verification
+- ✅ GitHub Actions continuous validation
+
+---
+
+This repository provides an open validation and reproducibility framework for the Lanzarini Validation Suite.
+
+The repository intentionally excludes proprietary Triton kernel source code.
+
+Only validated public reports, measured experimental results, and reproducibility artifacts are included.
+
+---
+
 # Public Validation and Reproducibility Framework for Sparse-Local Attention Research
 
 The **Lanzarini Validation Suite** is an open scientific validation framework designed to evaluate the correctness, reproducibility and experimental integrity of sparse-local attention research.
