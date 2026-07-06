@@ -360,6 +360,18 @@ Any performance conclusions remain limited to the benchmark domains represented 
 
 ---
 
+# Backend Evaluation Scope
+
+The Validation Suite evaluates experimentally measured performance under specific benchmark configurations.
+
+Different attention backends may perform better under different experimentally evaluated regimes depending on sequence length, attention window, hardware platform and software stack.
+
+The purpose of the Validation Suite is to provide reproducible measurements and validation artifacts rather than to demonstrate universal performance superiority of any implementation.
+
+Whenever backend comparisons are published, conclusions remain limited to the measured benchmark configurations represented by the associated validation artifacts.
+
+---
+
 # Reproducibility
 
 Every published validation stage generates machine-readable artifacts.
