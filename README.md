@@ -638,6 +638,12 @@ Future releases will extend the Validation Suite through additional publicly rep
 
 ---
 
+## Scientific Claims
+
+For a claim-by-claim mapping between scientific statements, supporting evidence, limitations and validation status, see [`paper/CLAIM_LEDGER.md`](paper/CLAIM_LEDGER.md).
+
+---
+
 # Citation
 
 If this repository contributes to academic work, please cite the associated publication when available.
