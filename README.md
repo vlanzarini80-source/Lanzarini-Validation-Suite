@@ -84,6 +84,159 @@ This repository focuses on scientific reproducibility rather than algorithm impl
 
 ---
 
+# Problem
+
+Modern AI systems increasingly rely on Transformer architectures for inference.
+
+As sequence length grows, attention computation becomes one of the primary contributors to GPU execution time, memory traffic and energy consumption.
+
+The Lanzarini Validation Suite does not introduce a new foundation model or claim a universally superior attention implementation.
+
+Instead, it provides a transparent and reproducible experimental framework for evaluating sparse-local attention implementations under controlled benchmark conditions.
+
+Its objective is to determine, through experimentally validated evidence, under which configurations different attention backends provide measurable advantages.
+
+---
+
+# Why It Matters
+
+Even modest improvements in inference efficiency can translate into meaningful infrastructure savings when AI systems are deployed at scale.
+
+Potential application domains include:
+
+- Large Language Models (LLMs)
+- AI inference infrastructure
+- GPU inference engines
+- Edge AI
+- Vision Transformers
+- Speech AI
+- Robotics
+- Long-sequence scientific computing
+- Time-series AI
+- Scientific AI workloads
+
+Rather than promoting a specific implementation, the Validation Suite emphasizes transparent measurement, reproducibility and independent verification.
+
+---
+
+# Repository at a Glance
+
+The public repository provides a transparent validation and reproducibility framework designed to facilitate independent scientific verification of sparse-local attention research.
+
+Current public capabilities include:
+
+- ✅ Public validation and reproducibility framework
+- ✅ Reproducible validation workflow
+- ✅ Machine-readable validation artifacts (JSON, CSV, Markdown and HTML)
+- ✅ SHA-256 artifact integrity verification
+- ✅ Continuous validation through GitHub Actions
+- ✅ Configuration-specific experimental evidence
+- ✅ Public documentation and reproducibility reports
+
+The proprietary sparse-local attention kernel implementation and backend-selection logic are intentionally excluded from the public repository.
+
+The Validation Suite focuses on reproducibility, transparency and independent verification of experimentally validated public artifacts rather than distribution of proprietary implementation details.
+
+---
+
+# Quick Start
+
+The public Validation Suite can be executed in only a few minutes.
+
+Clone the repository:
+
+```bash
+git clone https://github.com/vlanzarini80-source/Lanzarini-Validation-Suite
+
+cd Lanzarini-Validation-Suite
+```
+
+Install the required dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Run the public validation workflow:
+
+```bash
+python scripts/v1a_environment_check.py
+python scripts/v1b_adapter_contract.py
+python scripts/v1c_micro_correctness.py
+python scripts/v1d_runtime_benchmark.py
+python scripts/v1e_artifact_manifest.py
+python scripts/v1f_report_generator.py
+```
+
+The Validation Suite automatically generates reproducible public artifacts including:
+
+- JSON validation reports
+- CSV benchmark tables
+- Markdown reports
+- HTML reports
+- SHA-256 integrity manifests
+
+Generated artifacts are written to:
+
+```text
+results/json/
+results/csv/
+results/reports/
+```
+
+The public repository intentionally excludes the proprietary sparse-local attention implementation.
+
+Instead, it enables independent verification of the published validation workflow, benchmark methodology, reproducibility pipeline and artifact integrity.
+
+---
+
+# Experimental Highlights
+
+The Validation Suite summarizes experimentally validated benchmark campaigns performed on the corresponding hardware configurations.
+
+Representative experimentally validated observations include:
+
+| Experiment | Representative Result |
+|------------|----------------------|
+| Energy per token vs FlexAttention | Up to **22.6% lower** in the tested configuration |
+| Throughput vs FlexAttention | Up to **25.5% higher** in the tested configuration |
+| FlashAttention comparison | **Backend selection is experimentally regime-dependent** |
+| Long-context evaluation | **Different scaling behaviour observed across tested backends** |
+| Validation Suite | Reproducible JSON, CSV, Markdown, HTML reports and SHA-256 integrity manifests |
+
+### What Can Be Independently Verified?
+
+Using the public Validation Suite, researchers can independently verify:
+
+- execution environment detection;
+- software configuration;
+- public validation workflow;
+- public benchmark execution;
+- validation artifact generation;
+- report generation;
+- SHA-256 integrity verification;
+- reproducibility of the published validation pipeline.
+
+The proprietary sparse-local attention implementation remains intentionally private and is therefore outside the scope of the public repository.
+
+> **Important**
+>
+> All reported measurements are configuration-specific and limited to the experimentally validated benchmark conditions.
+>
+> Performance depends on factors including sequence length, attention window, hardware platform and software stack.
+>
+> Different attention backends may perform better under different experimentally evaluated regimes.
+>
+> The Validation Suite provides reproducible experimental evidence and does **not** claim universal performance, energy or cost superiority of any implementation.
+
+### Experimental Summary
+
+The repository contains experimentally generated validation artifacts, benchmark summaries and reproducibility reports intended to facilitate independent scientific verification.
+
+All performance conclusions should be interpreted together with the corresponding benchmark configuration, validation reports and published experimental artifacts.
+
+---
+
 # Design Philosophy
 
 The Validation Suite follows four guiding principles:
