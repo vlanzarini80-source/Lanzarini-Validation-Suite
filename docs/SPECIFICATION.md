@@ -66,15 +66,15 @@ Future additions will remain consistent with the objective of documenting the ma
 
 Let
 
-- **Q ∈ ℝ^(N×d)** denote the query matrix;
-- **K ∈ ℝ^(N×d)** denote the key matrix;
-- **V ∈ ℝ^(N×dᵥ)** denote the value matrix.
+- **Q ∈ ℝ^(N × d)** denote the query matrix;
+- **K ∈ ℝ^(N × d)** denote the key matrix;
+- **V ∈ ℝ^(N × d_v)** denote the value matrix,
 
 where
 
 - **N** is the sequence length;
 - **d** is the attention head dimension;
-- **dᵥ** is the value dimension.
+- **d_v** is the value dimension.
 
 For each query position **i**, the sparse-local attention operator evaluates attention only over a causal local neighborhood.
 
@@ -85,47 +85,49 @@ For each query position **i**, the sparse-local attention operator evaluates att
 For every query position **i**, the admissible key set is defined as
 
 ```text
-Ω(i) = { j ∈ {0,…,i} : i − j ≤ W }
+Ω(i) = { j ∈ {0,...,i} : i − j ≤ W }
 ```
 
 where
 
 - **W** denotes the local attention window;
 - causal ordering is preserved;
-- keys outside the admissible set are excluded from the computation.
+- keys outside the admissible set are excluded from the attention computation.
 
 ---
 
 ## Attention Score
 
-For every admissible key position **j ∈ Ω(i)**, the attention score is
+For every admissible key position **j ∈ Ω(i)**, the attention score is defined as
 
 ```text
-s(i,j) = (Q[i] · K[j]ᵀ) / √d
+s(i,j) = (Q[i] · K[j]^T) / sqrt(d)
 ```
 
 where
 
-- **Q[i]** is the query vector at position *i*;
-- **K[j]** is the key vector at position *j*.
+- **Q[i]** denotes the query vector at position **i**;
+- **K[j]** denotes the key vector at position **j**.
 
 ---
 
 ## Attention Weights
 
-The normalized attention weights are
+The normalized attention weights are defined as
 
 ```text
-α(i,j) = exp(s(i,j)) / Σ_{k∈Ω(i)} exp(s(i,k))
+α(i,j) = exp(s(i,j))
+         ------------------------------------
+         Σ_{k∈Ω(i)} exp(s(i,k))
 ```
 
-The normalization is performed only over the admissible key positions contained in **Ω(i)**.
+where the normalization is performed only over the admissible key positions contained in **Ω(i)**.
 
 ---
 
 ## Attention Output
 
-The output vector for query position **i** is
+The output vector associated with query position **i** is defined as
 
 ```text
 O(i) = Σ_{j∈Ω(i)} α(i,j) · V(j)
@@ -139,8 +141,16 @@ where **V(j)** denotes the value vector associated with key position **j**.
 
 The sparse-local attention operator computes the standard scaled dot-product attention restricted to a causal local neighborhood defined by the window parameter **W**.
 
-No attention scores or attention weights are computed for positions outside the admissible key set.
+Only keys belonging to the admissible set **Ω(i)** participate in the attention computation. No attention scores or attention weights are computed for positions outside this set.
 
-The mathematical operator defined above is independent of any specific software implementation, GPU kernel implementation, compiler optimization, or hardware-specific optimization strategy.
+This specification defines the mathematical behavior of the sparse-local attention operator independently of any software implementation.
 
-This document specifies only the observable mathematical behavior of the operator and does not disclose proprietary implementation details.
+It does **not** define:
+
+- implementation details;
+- GPU kernel architecture;
+- compiler optimizations;
+- hardware-specific optimization strategies;
+- proprietary implementation details.
+
+The mathematical operator specified above is the reference semantics evaluated by the Lanzarini Validation Suite.
