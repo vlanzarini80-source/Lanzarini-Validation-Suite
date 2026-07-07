@@ -6,7 +6,7 @@ This document specifies the mathematical behavior of the sparse-local attention 
 
 Its purpose is to describe the observable semantics of the operator independently of any specific software implementation.
 
-The proprietary implementation is intentionally not included in this repository. This document therefore specifies the operator mathematically rather than implementation details.
+The proprietary implementation is intentionally not included in this repository. Consequently, this document specifies the mathematical operator rather than implementation details.
 
 ---
 
@@ -14,14 +14,14 @@ The proprietary implementation is intentionally not included in this repository.
 
 This specification defines:
 
-- the mathematical attention operator;
-- the local attention mask;
-- the expected numerical behavior;
-- computational properties;
+- the mathematical sparse-local attention operator;
+- the causal local attention mask;
+- the expected numerical semantics;
+- computational characteristics;
 - correctness criteria;
-- experimental validation scope.
+- the scope of experimental validation.
 
-It does **not** disclose proprietary implementation details.
+This document intentionally does **not** disclose proprietary implementation details.
 
 ---
 
@@ -30,11 +30,35 @@ It does **not** disclose proprietary implementation details.
 The operator is designed to:
 
 - preserve deterministic sparse-local attention semantics;
-- reduce unnecessary attention computation outside the local window;
+- restrict attention computation to a causal local window;
 - support reproducible experimental validation;
-- remain compatible with standard Transformer attention formulations.
+- remain compatible with the standard scaled dot-product attention formulation used in Transformer architectures.
 
 Implementation-specific optimization strategies are outside the scope of this specification.
+
+---
+
+## Document Status
+
+**Current version:** Draft 2
+
+The current document includes:
+
+- purpose;
+- scope;
+- design goals;
+- formal mathematical definition.
+
+Future revisions may include:
+
+- implementation-independent pseudocode;
+- computational complexity analysis;
+- numerical properties;
+- correctness discussion;
+- validation methodology;
+- documented limitations.
+
+Future additions will remain consistent with the objective of documenting the mathematical behavior of the operator without disclosing proprietary implementation details.
 
 ---
 
@@ -43,72 +67,70 @@ Implementation-specific optimization strategies are outside the scope of this sp
 Let
 
 \[
-Q \in \mathbb{R}^{N \times d},
-\qquad
-K \in \mathbb{R}^{N \times d},
-\qquad
+Q \in \mathbb{R}^{N \times d}, \qquad
+K \in \mathbb{R}^{N \times d}, \qquad
 V \in \mathbb{R}^{N \times d_v}
 \]
 
-denote the query, key and value matrices, where \(N\) is the sequence length.
+denote the query, key and value matrices of a Transformer attention layer, where:
 
-For each query position \(i\), attention is restricted to a causal local window defined by
+- \(N\) is the sequence length;
+- \(d\) is the attention head dimension;
+- \(d_v\) is the value dimension.
+
+For each query position \(i\), the sparse-local attention operator considers only keys contained within a causal local attention window.
+
+Define the admissible key set
 
 \[
-\mathcal{W}(i)=
+\Omega(i)
+=
 \left\{
 j
 \;\middle|\;
-0\le j\le i,\;
-i-j\le W
+0 \le j \le i,\;
+i-j \le W
 \right\},
 \]
 
-where \(W\) denotes the local attention window.
+where:
 
-The attention output is defined as
+- \(W\) denotes the local attention window;
+- causal ordering is preserved;
+- positions outside the admissible window are excluded from attention computation.
+
+The attention score is defined as
 
 \[
-O_i
+s_{ij}
 =
-\sum_{j\in\mathcal{W}(i)}
-\alpha_{ij}V_j,
+\frac{Q_i K_j^{T}}
+{\sqrt d},
+\qquad
+j \in \Omega(i).
 \]
 
-with
+The normalized attention weights are
 
 \[
 \alpha_{ij}
 =
-\frac{
-\exp
-\left(
-Q_iK_j^\top/\sqrt d
-\right)
-}{
-\sum_{k\in\mathcal{W}(i)}
-\exp
-\left(
-Q_iK_k^\top/\sqrt d
-\right)
-}.
+\frac{\exp(s_{ij})}
+{\sum\limits_{k\in\Omega(i)}
+\exp(s_{ik})}.
 \]
 
-This specification defines the mathematical operator only.
+Finally, the attention output is
 
-It does not prescribe any particular implementation strategy or GPU optimization.
+\[
+O_i
+=
+\sum_{j\in\Omega(i)}
+\alpha_{ij}V_j.
+\]
 
----
+This operator corresponds to the standard scaled dot-product attention restricted to a causal local neighborhood defined by the window parameter \(W\).
 
-## Document Status
+No attention weights are computed for positions outside the admissible set \(\Omega(i)\).
 
-Current version: Draft 1
-
-Future revisions will progressively include:
-
-- formal mathematical definition;
-- pseudocode;
-- computational complexity analysis;
-- numerical properties;
-- correctness proofs where applicable;
-- validation methodology references.Mathematical Specification of the Sparse-Local Attention Operator
+This specification defines only the mathematical behavior of the operator and is independent of any particular software implementation or hardware-specific optimization.
