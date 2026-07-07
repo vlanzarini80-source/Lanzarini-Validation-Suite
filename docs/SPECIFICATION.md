@@ -64,73 +64,72 @@ Future additions will remain consistent with the objective of documenting the ma
 
 # Mathematical Definition
 
-Let
+Let:
 
-\[
-Q \in \mathbb{R}^{N \times d}, \qquad
-K \in \mathbb{R}^{N \times d}, \qquad
-V \in \mathbb{R}^{N \times d_v}
-\]
-
-denote the query, key and value matrices of a Transformer attention layer, where:
-
-- \(N\) is the sequence length;
-- \(d\) is the attention head dimension;
-- \(d_v\) is the value dimension.
-
-For each query position \(i\), the sparse-local attention operator considers only keys contained within a causal local attention window.
-
-Define the admissible key set
-
-\[
-\Omega(i)
-=
-\left\{
-j
-\;\middle|\;
-0 \le j \le i,\;
-i-j \le W
-\right\},
-\]
+- **Q ∈ ℝ^(N×d)** be the query matrix;
+- **K ∈ ℝ^(N×d)** be the key matrix;
+- **V ∈ ℝ^(N×dᵥ)** be the value matrix.
 
 where:
 
-- \(W\) denotes the local attention window;
+- **N** is the sequence length;
+- **d** is the attention head dimension;
+- **dᵥ** is the value dimension.
+
+For every query position **i**, the sparse-local attention operator considers only keys contained within a causal local attention window.
+
+## Admissible Key Set
+
+The admissible key set is defined as:
+
+```text
+Ω(i) = { j | 0 ≤ j ≤ i and i − j ≤ W }
+```
+
+where:
+
+- **W** denotes the local attention window;
 - causal ordering is preserved;
 - positions outside the admissible window are excluded from attention computation.
 
-The attention score is defined as
+---
 
-\[
-s_{ij}
-=
-\frac{Q_i K_j^{T}}
-{\sqrt d},
-\qquad
-j \in \Omega(i).
-\]
+## Attention Score
 
-The normalized attention weights are
+For every admissible key position **j ∈ Ω(i)**:
 
-\[
-\alpha_{ij}
-=
-\frac{\exp(s_{ij})}
-{\sum\limits_{k\in\Omega(i)}
-\exp(s_{ik})}.
-\]
+```text
+s(i,j) = (Q[i] · K[j]ᵀ) / √d
+```
 
-Finally, the attention output is
+---
 
-\[
-O_i
-=
-\sum_{j\in\Omega(i)}
-\alpha_{ij}V_j.
-\]
+## Attention Weights
 
-This operator corresponds to the standard scaled dot-product attention restricted to a causal local neighborhood defined by the window parameter \(W\).
+The normalized attention weights are defined as:
 
-No attention weights are computed for positions outside the admissible set \(\Omega(i)\).
+```text
+α(i,j) = exp(s(i,j)) / Σ_{k ∈ Ω(i)} exp(s(i,k))
+```
 
-This specification defines only the mathematical behavior of the operator and is independent of any particular software implementation or hardware-specific optimization.
+---
+
+## Attention Output
+
+The attention output is defined as:
+
+```text
+O[i] = Σ_{j ∈ Ω(i)} α(i,j) V[j]
+```
+
+---
+
+## Operator Semantics
+
+The sparse-local attention operator computes standard scaled dot-product attention restricted to a causal local neighborhood defined by the window parameter **W**.
+
+No attention computation is performed for positions outside the admissible key set.
+
+This mathematical specification defines only the observable behavior of the operator.
+
+It is independent of any particular software implementation, GPU kernel implementation, compiler optimization or hardware-specific optimization strategy.
