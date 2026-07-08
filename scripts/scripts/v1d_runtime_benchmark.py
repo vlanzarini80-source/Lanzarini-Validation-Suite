@@ -1,4 +1,5 @@
 import csv
+import importlib
 import json
 import os
 import statistics
@@ -11,7 +12,11 @@ import torch
 import torch.nn.functional as F
 
 
-ROOT = Path(__file__).resolve().parents[1]
+try:
+    ROOT = Path(__file__).resolve().parents[1]
+except NameError:
+    ROOT = Path.cwd()
+
 OUT_JSON_DIR = ROOT / "results" / "json"
 OUT_CSV_DIR = ROOT / "results" / "csv"
 OUT_JSON_DIR.mkdir(parents=True, exist_ok=True)
@@ -24,20 +29,9 @@ ERRORS_PATH = OUT_CSV_DIR / "v1d_runtime_smoke_errors.csv"
 PRIVATE_KERNEL_DIR = Path(
     os.environ.get("LANZARINI_PRIVATE_KERNEL_DIR", ROOT / "private_kernel")
 )
-sys.path.insert(0, str(PRIVATE_KERNEL_DIR))
 
-from adapter import selected_forward_q2
-
-assert callable(selected_forward_q2), "selected_forward_q2 is not callable"
-assert torch.cuda.is_available(), "CUDA not available"
-
-try:
-    from flash_attn import flash_attn_func
-    FLASH_OK = True
-    FLASH_ERROR = None
-except Exception as e:
-    FLASH_OK = False
-    FLASH_ERROR = repr(e)
+ADAPTER_MODULE = os.environ.get("LANZARINI_ADAPTER_MODULE", "adapter")
+EXPECTED_FUNCTION = "selected_forward_q2"
 
 DEVICE = "cuda"
 DTYPE = torch.float16
@@ -60,6 +54,59 @@ RUNS = 20
 
 REL_TOL = 1e-3
 COS_TOL = 0.999
+
+
+PUBLIC_MODE_NOTE = (
+    "The proprietary adapter is intentionally not included in the public repository. "
+    "V1D is skipped in public-only mode unless LANZARINI_PRIVATE_KERNEL_DIR points "
+    "to a local proprietary adapter. This is expected behavior and does not indicate "
+    "a failure of the public validation framework."
+)
+
+
+def load_adapter_function():
+    adapter_path = PRIVATE_KERNEL_DIR / "adapter.py"
+
+    if not PRIVATE_KERNEL_DIR.exists():
+        return None, {
+            "status": "SKIPPED_PUBLIC_MODE",
+            "public_mode": True,
+            "reason": f"Private adapter directory not found: {PRIVATE_KERNEL_DIR}",
+        }
+
+    if not adapter_path.exists():
+        return None, {
+            "status": "SKIPPED_PUBLIC_MODE",
+            "public_mode": True,
+            "reason": f"Private adapter file not found: {adapter_path}",
+        }
+
+    sys.path.insert(0, str(PRIVATE_KERNEL_DIR))
+    adapter = importlib.import_module(ADAPTER_MODULE)
+
+    if not hasattr(adapter, EXPECTED_FUNCTION):
+        raise AttributeError(f"{ADAPTER_MODULE}.py does not expose {EXPECTED_FUNCTION}")
+
+    fn = getattr(adapter, EXPECTED_FUNCTION)
+
+    if not callable(fn):
+        raise TypeError(f"{EXPECTED_FUNCTION} exists but is not callable")
+
+    return fn, {
+        "status": "ADAPTER_AVAILABLE",
+        "public_mode": False,
+        "reason": None,
+    }
+
+
+try:
+    from flash_attn import flash_attn_func
+
+    FLASH_OK = True
+    FLASH_ERROR = None
+except Exception as e:
+    FLASH_OK = False
+    FLASH_ERROR = repr(e)
 
 
 def make_local_additive_mask(T, W, device, dtype):
@@ -180,6 +227,46 @@ def summarize_times(times_ms):
     }
 
 
+def write_empty_csv_files() -> None:
+    row_fields = [
+        "stage",
+        "T",
+        "W",
+        "B",
+        "H",
+        "D",
+        "seed",
+        "dtype",
+        "lanz_correct",
+        "lanz_max_abs",
+        "lanz_relative_l2",
+        "lanz_cos",
+        "lanz_median_ms",
+        "lanz_mean_ms",
+        "lanz_min_ms",
+        "lanz_cv_pct",
+        "sdpa_median_ms",
+        "sdpa_mean_ms",
+        "sdpa_min_ms",
+        "sdpa_cv_pct",
+        "flash_available",
+        "flash_correct",
+        "flash_median_ms",
+        "flash_mean_ms",
+        "flash_min_ms",
+        "flash_cv_pct",
+    ]
+
+    with open(ROWS_PATH, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=row_fields)
+        writer.writeheader()
+
+    with open(ERRORS_PATH, "w", newline="", encoding="utf-8") as f:
+        fields = ["T", "W", "seed", "error", "traceback"]
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()
+
+
 def main() -> None:
     rows = []
     errors = []
@@ -187,6 +274,104 @@ def main() -> None:
     print("=" * 80)
     print("LANZARINI VALIDATION SUITE v1.0 - V1D RUNTIME SMOKE BENCHMARK")
     print("=" * 80)
+
+    if not torch.cuda.is_available():
+        summary = {
+            "stage": "V1D_RUNTIME_SMOKE_BENCHMARK",
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "status": "FAILED_NO_CUDA",
+            "public_mode": False,
+            "pass_v1d": False,
+            "errors": ["CUDA is not available"],
+            "strict_note": (
+                "V1D requires CUDA because runtime smoke benchmarking is performed "
+                "on CUDA tensors. No runtime result is produced when CUDA is unavailable."
+            ),
+        }
+
+        write_empty_csv_files()
+
+        with open(REPORT_PATH, "w", encoding="utf-8") as f:
+            json.dump(summary, f, indent=2)
+
+        print(json.dumps(summary, indent=2))
+        raise SystemExit("V1D FAILED: CUDA is not available")
+
+    try:
+        selected_forward_q2, adapter_status = load_adapter_function()
+    except Exception as e:
+        summary = {
+            "stage": "V1D_RUNTIME_SMOKE_BENCHMARK",
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "status": "FAILED_ADAPTER_LOAD",
+            "public_mode": False,
+            "pass_v1d": False,
+            "adapter_module": ADAPTER_MODULE,
+            "expected_function": EXPECTED_FUNCTION,
+            "private_kernel_dir": str(PRIVATE_KERNEL_DIR),
+            "errors": [repr(e)],
+            "traceback": traceback.format_exc(),
+            "strict_note": (
+                "V1D is a runtime smoke benchmark only. It verifies that the private "
+                "adapter can be timed on small shapes. It is not a full performance claim "
+                "and does not expose private kernel source code."
+            ),
+        }
+
+        write_empty_csv_files()
+
+        with open(REPORT_PATH, "w", encoding="utf-8") as f:
+            json.dump(summary, f, indent=2)
+
+        print(json.dumps(summary, indent=2))
+        raise SystemExit("V1D FAILED: adapter could not be loaded")
+
+    if adapter_status["status"] == "SKIPPED_PUBLIC_MODE":
+        summary = {
+            "stage": "V1D_RUNTIME_SMOKE_BENCHMARK",
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "status": "SKIPPED_PUBLIC_MODE",
+            "public_mode": True,
+            "pass_v1d": None,
+            "adapter_module": ADAPTER_MODULE,
+            "expected_function": EXPECTED_FUNCTION,
+            "private_kernel_dir": str(PRIVATE_KERNEL_DIR),
+            "reason": adapter_status["reason"],
+            "public_mode_note": PUBLIC_MODE_NOTE,
+            "FLASH_OK": FLASH_OK,
+            "FLASH_ERROR": FLASH_ERROR,
+            "n_rows": 0,
+            "n_correct": 0,
+            "n_fail": 0,
+            "n_errors": 0,
+            "rows_csv": str(ROWS_PATH),
+            "errors_csv": str(ERRORS_PATH),
+            "strict_note": (
+                "V1D requires a locally available proprietary adapter to time "
+                "selected_forward_q2. The proprietary adapter is intentionally not "
+                "included in the public repository. Therefore V1D is skipped in "
+                "public-only mode."
+            ),
+        }
+
+        write_empty_csv_files()
+
+        with open(REPORT_PATH, "w", encoding="utf-8") as f:
+            json.dump(summary, f, indent=2)
+
+        print(json.dumps(summary, indent=2))
+        print("=" * 80)
+        print("REPORT:", REPORT_PATH)
+        print("ROWS:", ROWS_PATH)
+        print("ERRORS:", ERRORS_PATH)
+        print("STATUS_V1D:", summary["status"])
+        print("PASS_V1D:", summary["pass_v1d"])
+        print("=" * 80)
+        print("V1D SKIPPED: public-only mode")
+        print("REASON:", adapter_status["reason"])
+        print("This is expected behavior for public validation.")
+        return
+
     print("DEVICE:", DEVICE)
     print("GPU:", torch.cuda.get_device_name(0))
     print("TORCH:", torch.__version__)
@@ -221,7 +406,9 @@ def main() -> None:
                 cm_lanz = correctness_metrics(out_lanz, out_ref)
 
                 if not cm_lanz["pass"]:
-                    raise RuntimeError(f"Lanzarini correctness failed before timing: {cm_lanz}")
+                    raise RuntimeError(
+                        f"Lanzarini correctness failed before timing: {cm_lanz}"
+                    )
 
                 lanz_times = time_fn(selected_forward_q2, q, k, v, W)
                 sdpa_times = time_fn(sdpa_local_reference, q, k, v, W)
@@ -265,11 +452,21 @@ def main() -> None:
                     "sdpa_min_ms": sdpa_summary["min_ms"],
                     "sdpa_cv_pct": sdpa_summary["cv_pct"],
                     "flash_available": FLASH_OK,
-                    "flash_correct": flash_correctness["pass"] if flash_correctness else None,
-                    "flash_median_ms": flash_summary["median_ms"] if flash_summary else None,
-                    "flash_mean_ms": flash_summary["mean_ms"] if flash_summary else None,
-                    "flash_min_ms": flash_summary["min_ms"] if flash_summary else None,
-                    "flash_cv_pct": flash_summary["cv_pct"] if flash_summary else None,
+                    "flash_correct": flash_correctness["pass"]
+                    if flash_correctness
+                    else None,
+                    "flash_median_ms": flash_summary["median_ms"]
+                    if flash_summary
+                    else None,
+                    "flash_mean_ms": flash_summary["mean_ms"]
+                    if flash_summary
+                    else None,
+                    "flash_min_ms": flash_summary["min_ms"]
+                    if flash_summary
+                    else None,
+                    "flash_cv_pct": flash_summary["cv_pct"]
+                    if flash_summary
+                    else None,
                 }
 
                 rows.append(row)
@@ -303,6 +500,8 @@ def main() -> None:
     summary = {
         "stage": "V1D_RUNTIME_SMOKE_BENCHMARK",
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "status": "PASSED" if pass_v1d else "FAILED_RUNTIME_SMOKE",
+        "public_mode": False,
         "device": DEVICE,
         "gpu": torch.cuda.get_device_name(0),
         "torch": torch.__version__,
@@ -320,23 +519,43 @@ def main() -> None:
         "n_correct": n_correct,
         "n_fail": n_fail,
         "n_errors": n_errors,
-        "lanz_median_ms_min": min([row["lanz_median_ms"] for row in rows], default=None),
-        "lanz_median_ms_max": max([row["lanz_median_ms"] for row in rows], default=None),
-        "sdpa_median_ms_min": min([row["sdpa_median_ms"] for row in rows], default=None),
-        "sdpa_median_ms_max": max([row["sdpa_median_ms"] for row in rows], default=None),
+        "lanz_median_ms_min": min(
+            [row["lanz_median_ms"] for row in rows],
+            default=None,
+        ),
+        "lanz_median_ms_max": max(
+            [row["lanz_median_ms"] for row in rows],
+            default=None,
+        ),
+        "sdpa_median_ms_min": min(
+            [row["sdpa_median_ms"] for row in rows],
+            default=None,
+        ),
+        "sdpa_median_ms_max": max(
+            [row["sdpa_median_ms"] for row in rows],
+            default=None,
+        ),
         "flash_median_ms_min": min(
-            [row["flash_median_ms"] for row in rows if row["flash_median_ms"] is not None],
+            [
+                row["flash_median_ms"]
+                for row in rows
+                if row["flash_median_ms"] is not None
+            ],
             default=None,
         ),
         "flash_median_ms_max": max(
-            [row["flash_median_ms"] for row in rows if row["flash_median_ms"] is not None],
+            [
+                row["flash_median_ms"]
+                for row in rows
+                if row["flash_median_ms"] is not None
+            ],
             default=None,
         ),
         "pass_v1d": pass_v1d,
         "strict_note": (
-            "V1D is a runtime smoke benchmark only. It verifies that the private adapter "
-            "can be timed reproducibly on small shapes. It is not a full performance claim "
-            "and does not expose private kernel source code."
+            "V1D is a runtime smoke benchmark only. It verifies that the private "
+            "adapter can be timed reproducibly on small shapes. It is not a full "
+            "performance claim and does not expose private kernel source code."
         ),
         "rows_csv": str(ROWS_PATH),
         "errors_csv": str(ERRORS_PATH),
@@ -346,12 +565,32 @@ def main() -> None:
         json.dump(summary, f, indent=2)
 
     row_fields = [
-        "stage", "T", "W", "B", "H", "D", "seed", "dtype",
-        "lanz_correct", "lanz_max_abs", "lanz_relative_l2", "lanz_cos",
-        "lanz_median_ms", "lanz_mean_ms", "lanz_min_ms", "lanz_cv_pct",
-        "sdpa_median_ms", "sdpa_mean_ms", "sdpa_min_ms", "sdpa_cv_pct",
-        "flash_available", "flash_correct",
-        "flash_median_ms", "flash_mean_ms", "flash_min_ms", "flash_cv_pct",
+        "stage",
+        "T",
+        "W",
+        "B",
+        "H",
+        "D",
+        "seed",
+        "dtype",
+        "lanz_correct",
+        "lanz_max_abs",
+        "lanz_relative_l2",
+        "lanz_cos",
+        "lanz_median_ms",
+        "lanz_mean_ms",
+        "lanz_min_ms",
+        "lanz_cv_pct",
+        "sdpa_median_ms",
+        "sdpa_mean_ms",
+        "sdpa_min_ms",
+        "sdpa_cv_pct",
+        "flash_available",
+        "flash_correct",
+        "flash_median_ms",
+        "flash_mean_ms",
+        "flash_min_ms",
+        "flash_cv_pct",
     ]
 
     with open(ROWS_PATH, "w", newline="", encoding="utf-8") as f:
@@ -375,6 +614,7 @@ def main() -> None:
     print("REPORT:", REPORT_PATH)
     print("ROWS:", ROWS_PATH)
     print("ERRORS:", ERRORS_PATH)
+    print("STATUS_V1D:", summary["status"])
     print("PASS_V1D:", pass_v1d)
     print("=" * 80)
 
