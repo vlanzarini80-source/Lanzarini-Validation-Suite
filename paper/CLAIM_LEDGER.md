@@ -1,47 +1,74 @@
 # Claim Ledger
 
-This document lists the scientific claims currently supported by the Lanzarini Validation Suite and the broader experimental work.
+## Purpose
 
-The purpose is to separate validated evidence from future work and to avoid unsupported performance claims.
+This document maps the principal scientific claims made by the Lanzarini Validation Suite to the publicly documented evidence available in this repository.
 
-| Claim | Evidence | Status | Scope |
-|---|---|---|---|
-| The public repository provides a reproducible validation workflow | V1A–V1F public validation stages, JSON/CSV/HTML reports, SHA-256 manifests | Supported | Public Validation Suite |
-| The proprietary kernel is intentionally excluded from the public repository | Repository structure and README scope | Supported | Public release |
-| Numerical validation is performed only under defined benchmark configurations | V1C correctness artifacts | Supported | Tested configurations only |
-| Runtime smoke validation verifies benchmark execution, not universal performance | V1D runtime smoke reports | Supported | Smoke-test scope |
-| Energy/token reduction up to 22.6% was observed vs FlexAttention | NVML energy campaign, tested configuration | Supported | Specific tested configuration |
-| Throughput improvement up to 25.5% was observed vs FlexAttention | Runtime benchmark, tested configuration | Supported | Specific tested configuration |
-| Backend performance is regime-dependent | FlashAttention comparison campaigns including V52D-R2-FIX | Supported | Tested A100 configurations |
-| Lanzarini G4 was faster than FlashAttention at T=16384, W=128 in the clean benchmark | V52D-R2-FIX | Supported | A100, FP16, D=64, tested shape |
-| FlashAttention was faster than Lanzarini G4 at T=65536, W=512 in the clean benchmark | V52D-R2-FIX | Supported | A100, FP16, D=64, tested shape |
-| The project supports backend-selection research rather than universal replacement claims | Combined benchmark evidence | Supported | Experimental interpretation |
-| The public repository does not independently validate the proprietary kernel implementation | Scope limitation | Explicit limitation | Public repository |
-| Universal speedup is not claimed | README disclaimer and benchmark evidence | Supported | All public claims |
-| Universal energy saving is not claimed | README disclaimer and limited NVML evidence | Supported | All public claims |
-| End-to-end production benefit is not yet established | vLLM integration overhead observations | Open / limited | Requires further work |
-| Standard long-context task benchmarks are future work | LongBench, NIAH, perplexity not yet public in this repository | Future work | Future validation |
+Its purpose is to distinguish supported claims, documented limitations, and future work, while avoiding interpretations beyond the available experimental evidence.
+
+The evidence referenced in this document is limited to publicly available documentation and validation artifacts contained in this repository.
+
+---
+
+## Claim Mapping
+
+| Claim | Supporting Evidence | Status | Scope |
+|-------|----------------------|--------|-------|
+| The repository provides a publicly documented validation and reproducibility workflow. | README, `docs/VALIDATION_METHODOLOGY.md`, public validation artifacts | Supported | Public Validation Suite |
+| The proprietary implementation is intentionally excluded from the public repository. | README, `docs/ADAPTER_INTERFACE.md`, Repository Scope | Supported | Public repository |
+| The evaluated operator is mathematically specified independently of its implementation. | `docs/SPECIFICATION.md` | Supported | Public documentation |
+| Computational complexity of the documented operator is publicly described. | `docs/COMPLEXITY.md` | Supported | Public documentation |
+| Correctness evaluation follows documented validation criteria. | `docs/CORRECTNESS.md`, validation reports | Supported | Experimentally evaluated configurations |
+| Benchmark results are reported only for experimentally evaluated configurations. | `docs/BENCHMARK_SCOPE.md`, validation reports | Supported | Experimentally evaluated configurations |
+| Runtime validation documents observed behavior under documented benchmark conditions. | Validation reports, `paper/RESULTS.md` | Supported | Documented benchmark configurations |
+| Backend performance is experimentally observed to be regime-dependent. | Public benchmark reports, `paper/RESULTS.md` | Supported | Documented experimental configurations |
+| The public repository does not independently validate the proprietary implementation. | `docs/LIMITATIONS.md`, Repository Scope | Explicit limitation | Public repository |
+| Universal performance superiority is not claimed. | README, `docs/LIMITATIONS.md`, `docs/BENCHMARK_SCOPE.md` | Supported | All public claims |
+| Universal energy reduction is not claimed. | README, `docs/LIMITATIONS.md` | Supported | All public claims |
+| End-to-end production benefit has not yet been publicly established. | `docs/LIMITATIONS.md`, `paper/DISCUSSION.md` | Open | Requires additional public evidence |
+| Standard long-context downstream benchmarks remain outside the current public validation scope. | `docs/BENCHMARK_SCOPE.md` | Future work | Future validation |
+
+---
 
 ## Interpretation
 
-The public repository should be interpreted as a reproducibility and validation framework for published experimental artifacts.
+The public repository should be interpreted as a validation and reproducibility framework supported by publicly documented experimental evidence.
 
-It does not claim to provide a complete open-source implementation of the proprietary sparse-local attention kernel.
+It should not be interpreted as an open-source release of the proprietary implementation.
 
-The strongest current scientific position is:
+The strongest publicly supported scientific position is:
 
-> Different attention backends perform better under different experimentally validated regimes. The project therefore supports backend-selection and reproducible benchmarking rather than universal superiority claims.
+> Different attention backends may perform differently under different experimentally evaluated configurations. The Validation Suite therefore supports evidence-based backend evaluation, reproducible benchmarking, and transparent validation rather than universal superiority claims.
 
-## Future Evidence Required
+---
 
-To strengthen the scientific contribution, future work should add:
+## Future Evidence
 
-- mathematical specification of the sparse-local operator;
-- pseudocode independent of proprietary source code;
-- complexity analysis;
-- benchmark tables tied to public artifacts;
+Future revisions of the Validation Suite may strengthen the available public evidence through:
+
+- benchmark tables directly linked to public validation artifacts;
 - LongBench or equivalent long-context evaluations;
 - Needle-in-a-Haystack evaluations;
-- perplexity or downstream quality checks;
+- downstream quality evaluation (for example, perplexity);
 - end-to-end serving benchmarks;
-- expanded hardware coverage.
+- additional hardware platforms;
+- additional software environments.
+
+Future scientific claims should remain supported by publicly documented experimental evidence.
+
+---
+
+## Consistency
+
+This document should be interpreted together with:
+
+- `README.md`
+- `docs/SPECIFICATION.md`
+- `docs/VALIDATION_METHODOLOGY.md`
+- `docs/BENCHMARK_SCOPE.md`
+- `docs/LIMITATIONS.md`
+- `paper/RESULTS.md`
+- `paper/DISCUSSION.md`
+- `paper/CONCLUSION.md`
+
+In case of inconsistency, the documented experimental evidence and validation artifacts take precedence over summary statements.
