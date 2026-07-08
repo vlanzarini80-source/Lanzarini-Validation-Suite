@@ -44,6 +44,22 @@ Any reference to other repositories should be considered independent unless expl
 
 ---
 
+## Documentation
+
+The technical documentation for the public Validation Suite is available in the `docs/` directory.
+
+| Document | Purpose |
+|----------|---------|
+| [`SPECIFICATION.md`](docs/SPECIFICATION.md) | Mathematical specification of the sparse-local attention operator. |
+| [`COMPLEXITY.md`](docs/COMPLEXITY.md) | Computational complexity of the documented operator. |
+| [`CORRECTNESS.md`](docs/CORRECTNESS.md) | Correctness criteria used during validation. |
+| [`ADAPTER_INTERFACE.md`](docs/ADAPTER_INTERFACE.md) | Public adapter interface specification. |
+| [`VALIDATION_METHODOLOGY.md`](docs/VALIDATION_METHODOLOGY.md) | Public validation methodology. |
+| [`BENCHMARK_SCOPE.md`](docs/BENCHMARK_SCOPE.md) | Scope of reported benchmark evidence. |
+| [`LIMITATIONS.md`](docs/LIMITATIONS.md) | Known limitations and interpretation boundaries. |
+
+---
+
 # Public Validation and Reproducibility Framework for Sparse-Local Attention Research
 
 The **Lanzarini Validation Suite** is an open scientific validation framework designed to improve transparency, reproducibility and independent verification of sparse-local attention research.
