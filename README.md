@@ -82,6 +82,37 @@ No claim is made that the mathematical formulation presented in this repository 
 
 ---
 
+## Research Claims
+
+This repository makes only limited, evidence-based claims.
+
+### What this repository claims
+
+This repository claims that it provides:
+
+- a public validation and reproducibility framework for sparse-local attention research;
+- a documented mathematical specification of the evaluated operator;
+- public validation scripts and artifacts;
+- documented correctness, complexity, benchmark scope, and limitation statements;
+- a reproducibility-oriented workflow for inspecting reported experimental evidence.
+
+### What this repository does not claim
+
+This repository does **not** claim:
+
+- a novel mathematical attention formulation;
+- universal performance superiority;
+- universal energy savings;
+- correctness outside documented validation conditions;
+- benchmark validity outside experimentally evaluated configurations;
+- disclosure of the proprietary implementation.
+
+All performance, correctness, and reproducibility statements should be interpreted only within the scope documented in the validation artifacts and technical documentation.
+
+For a claim-by-claim mapping between scientific statements, supporting evidence, limitations, and validation status, see [`paper/CLAIM_LEDGER.md`](paper/CLAIM_LEDGER.md).
+
+---
+
 # Public Validation and Reproducibility Framework for Sparse-Local Attention Research
 
 The **Lanzarini Validation Suite** is an open scientific validation framework designed to improve transparency, reproducibility and independent verification of sparse-local attention research.
