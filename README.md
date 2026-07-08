@@ -32,6 +32,18 @@
 
 ---
 
+## Repository Scope
+
+This repository is exclusively dedicated to the public validation and reproducibility framework for sparse-local attention research conducted within the Lanzarini Validation Suite.
+
+It documents the mathematical operator, public validation methodology, experimental evidence, reproducibility workflow, and validation artifacts associated with this research.
+
+This repository does **not** include, describe, validate, or support unrelated research projects, mathematical models, or experimental hypotheses that may exist in separate repositories maintained by the same author.
+
+Any reference to other repositories should be considered independent unless explicitly stated in this repository. 
+
+---
+
 # Public Validation and Reproducibility Framework for Sparse-Local Attention Research
 
 The **Lanzarini Validation Suite** is an open scientific validation framework designed to improve transparency, reproducibility and independent verification of sparse-local attention research.
