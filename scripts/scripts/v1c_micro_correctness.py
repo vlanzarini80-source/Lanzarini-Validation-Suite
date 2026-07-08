@@ -43,12 +43,30 @@ REL_TOL = 1e-3
 COS_TOL = 0.999
 
 
+PUBLIC_MODE_NOTE = (
+    "The proprietary adapter is intentionally not included in the public repository. "
+    "V1C is skipped in public-only mode unless LANZARINI_PRIVATE_KERNEL_DIR points "
+    "to a local proprietary adapter. This is expected behavior and does not indicate "
+    "a failure of the public validation framework."
+)
+
+
 def load_adapter_function():
+    adapter_path = PRIVATE_KERNEL_DIR / "adapter.py"
+
     if not PRIVATE_KERNEL_DIR.exists():
-        raise FileNotFoundError(
-            f"Missing private adapter directory: {PRIVATE_KERNEL_DIR}. "
-            "Set LANZARINI_PRIVATE_KERNEL_DIR to the local adapter directory."
-        )
+        return None, {
+            "status": "SKIPPED_PUBLIC_MODE",
+            "public_mode": True,
+            "reason": f"Private adapter directory not found: {PRIVATE_KERNEL_DIR}",
+        }
+
+    if not adapter_path.exists():
+        return None, {
+            "status": "SKIPPED_PUBLIC_MODE",
+            "public_mode": True,
+            "reason": f"Private adapter file not found: {adapter_path}",
+        }
 
     sys.path.insert(0, str(PRIVATE_KERNEL_DIR))
     adapter = importlib.import_module(ADAPTER_MODULE)
@@ -61,7 +79,11 @@ def load_adapter_function():
     if not callable(fn):
         raise TypeError(f"{EXPECTED_FUNCTION} exists but is not callable")
 
-    return fn
+    return fn, {
+        "status": "ADAPTER_AVAILABLE",
+        "public_mode": False,
+        "reason": None,
+    }
 
 
 def make_local_additive_mask(T, W, device, dtype):
@@ -129,18 +151,135 @@ def correctness_metrics(candidate, reference):
     }
 
 
+def write_empty_csv_files() -> None:
+    row_fields = [
+        "stage",
+        "T",
+        "W",
+        "B",
+        "H",
+        "D",
+        "seed",
+        "dtype",
+        "max_abs",
+        "mse",
+        "relative_l2",
+        "cos",
+        "finite_candidate",
+        "finite_reference",
+        "pass",
+    ]
+
+    with open(ROWS_PATH, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=row_fields)
+        writer.writeheader()
+
+    with open(ERRORS_PATH, "w", newline="", encoding="utf-8") as f:
+        fields = ["T", "W", "seed", "error", "traceback"]
+        writer = csv.DictWriter(f, fieldnames=fields)
+        writer.writeheader()
+
+
 def main() -> None:
-    if not torch.cuda.is_available():
-        raise SystemExit("V1C FAILED: CUDA is not available")
-
-    selected_forward_q2 = load_adapter_function()
-
     rows = []
     errors = []
 
     print("=" * 80)
     print("LANZARINI VALIDATION SUITE v1.0 - V1C MICRO CORRECTNESS AUDIT")
     print("=" * 80)
+
+    if not torch.cuda.is_available():
+        summary = {
+            "stage": "V1C_MICRO_CORRECTNESS_AUDIT",
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "status": "FAILED_NO_CUDA",
+            "public_mode": False,
+            "pass_v1c": False,
+            "errors": ["CUDA is not available"],
+            "strict_note": (
+                "V1C requires CUDA because correctness is evaluated on CUDA tensors. "
+                "No benchmark or correctness result is produced when CUDA is unavailable."
+            ),
+        }
+
+        write_empty_csv_files()
+
+        with open(REPORT_PATH, "w", encoding="utf-8") as f:
+            json.dump(summary, f, indent=2)
+
+        print(json.dumps(summary, indent=2))
+        raise SystemExit("V1C FAILED: CUDA is not available")
+
+    try:
+        selected_forward_q2, adapter_status = load_adapter_function()
+    except Exception as e:
+        summary = {
+            "stage": "V1C_MICRO_CORRECTNESS_AUDIT",
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "status": "FAILED_ADAPTER_LOAD",
+            "public_mode": False,
+            "pass_v1c": False,
+            "adapter_module": ADAPTER_MODULE,
+            "expected_function": EXPECTED_FUNCTION,
+            "private_kernel_dir": str(PRIVATE_KERNEL_DIR),
+            "errors": [repr(e)],
+            "traceback": traceback.format_exc(),
+            "strict_note": (
+                "V1C compares selected_forward_q2 against an SDPA local-window reference "
+                "on small shapes only. It performs no speed benchmark and does not expose "
+                "private kernel source code."
+            ),
+        }
+
+        write_empty_csv_files()
+
+        with open(REPORT_PATH, "w", encoding="utf-8") as f:
+            json.dump(summary, f, indent=2)
+
+        print(json.dumps(summary, indent=2))
+        raise SystemExit("V1C FAILED: adapter could not be loaded")
+
+    if adapter_status["status"] == "SKIPPED_PUBLIC_MODE":
+        summary = {
+            "stage": "V1C_MICRO_CORRECTNESS_AUDIT",
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "status": "SKIPPED_PUBLIC_MODE",
+            "public_mode": True,
+            "pass_v1c": None,
+            "adapter_module": ADAPTER_MODULE,
+            "expected_function": EXPECTED_FUNCTION,
+            "private_kernel_dir": str(PRIVATE_KERNEL_DIR),
+            "reason": adapter_status["reason"],
+            "public_mode_note": PUBLIC_MODE_NOTE,
+            "n_rows": 0,
+            "n_pass": 0,
+            "n_fail": 0,
+            "n_errors": 0,
+            "rows_csv": str(ROWS_PATH),
+            "errors_csv": str(ERRORS_PATH),
+            "strict_note": (
+                "V1C requires a locally available proprietary adapter to compare "
+                "selected_forward_q2 against the SDPA local-window reference. "
+                "The proprietary adapter is intentionally not included in the public repository."
+            ),
+        }
+
+        write_empty_csv_files()
+
+        with open(REPORT_PATH, "w", encoding="utf-8") as f:
+            json.dump(summary, f, indent=2)
+
+        print(json.dumps(summary, indent=2))
+        print("=" * 80)
+        print("REPORT:", REPORT_PATH)
+        print("STATUS_V1C:", summary["status"])
+        print("PASS_V1C:", summary["pass_v1c"])
+        print("=" * 80)
+        print("V1C SKIPPED: public-only mode")
+        print("REASON:", adapter_status["reason"])
+        print("This is expected behavior for public validation.")
+        return
+
     print("DEVICE:", DEVICE)
     print("DTYPE:", DTYPE)
     print("B,H,D:", B, H, D)
@@ -219,6 +358,8 @@ def main() -> None:
     summary = {
         "stage": "V1C_MICRO_CORRECTNESS_AUDIT",
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "status": "PASSED" if pass_v1c else "FAILED_CORRECTNESS",
+        "public_mode": False,
         "device": DEVICE,
         "gpu": torch.cuda.get_device_name(0),
         "torch": torch.__version__,
@@ -299,6 +440,7 @@ def main() -> None:
     print("REPORT:", REPORT_PATH)
     print("ROWS:", ROWS_PATH)
     print("ERRORS:", ERRORS_PATH)
+    print("STATUS_V1C:", summary["status"])
     print("PASS_V1C:", pass_v1c)
     print("=" * 80)
 
