@@ -60,6 +60,28 @@ The technical documentation for the public Validation Suite is available in the 
 
 ---
 
+## Scientific Positioning
+
+This repository documents a public validation and reproducibility framework for a sparse-local attention operator.
+
+The mathematical operator documented in this repository follows the standard sparse-local (sliding-window) causal attention formulation.
+
+This repository does **not** claim the introduction of a novel sparse-local attention operator or mathematical formulation.
+
+Instead, the primary contribution of this repository is the development of a public framework for:
+
+- rigorous validation;
+- experimental reproducibility;
+- correctness evaluation;
+- benchmark documentation;
+- transparent reporting of experimentally observed results.
+
+The proprietary implementation remains outside the scope of this public repository.
+
+No claim is made that the mathematical formulation presented in this repository is novel.
+
+---
+
 # Public Validation and Reproducibility Framework for Sparse-Local Attention Research
 
 The **Lanzarini Validation Suite** is an open scientific validation framework designed to improve transparency, reproducibility and independent verification of sparse-local attention research.
