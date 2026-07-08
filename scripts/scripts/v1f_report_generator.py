@@ -4,7 +4,11 @@ from html import escape
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+try:
+    ROOT = Path(__file__).resolve().parents[1]
+except NameError:
+    ROOT = Path.cwd()
+
 JSON_DIR = ROOT / "results" / "json"
 REPORT_DIR = ROOT / "results" / "reports"
 
@@ -29,40 +33,73 @@ def load_json(path: Path) -> dict:
         return json.load(f)
 
 
-def yesno(value: bool) -> str:
-    return "PASS" if value is True else "FAIL"
+def stage_label(data: dict | None, key: str) -> str:
+    if data is None:
+        return "MISSING"
+
+    status = data.get("status")
+
+    if data.get(key) is True:
+        return "PASS"
+
+    if status == "SKIPPED_PUBLIC_MODE":
+        return "SKIPPED_PUBLIC_MODE"
+
+    return "FAIL"
+
+
+def is_acceptable_public_status(data: dict | None, key: str) -> bool:
+    if data is None:
+        return False
+
+    if data.get(key) is True:
+        return True
+
+    if data.get("status") == "SKIPPED_PUBLIC_MODE":
+        return True
+
+    return False
 
 
 def main() -> None:
     missing_inputs = []
     stage_status = {}
+    stage_labels = {}
     reports = {}
 
     for stage, (path, key) in INPUTS.items():
         if not path.exists():
             missing_inputs.append(str(path))
             stage_status[stage] = False
+            stage_labels[stage] = "MISSING"
             reports[stage] = None
             continue
 
         data = load_json(path)
         reports[stage] = data
-        stage_status[stage] = data.get(key) is True
+        stage_status[stage] = is_acceptable_public_status(data, key)
+        stage_labels[stage] = stage_label(data, key)
 
-    all_pass = len(missing_inputs) == 0 and all(stage_status.values())
+    public_validation_complete = (
+        len(missing_inputs) == 0 and all(stage_status.values())
+    )
 
     summary = {
         "stage": "V1F_VALIDATION_REPORT_GENERATOR",
         "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
         "root": str(ROOT),
         "missing_inputs": missing_inputs,
-        "all_pass_v1a_to_v1e": all_pass,
+        "public_validation_complete": public_validation_complete,
+        "all_required_inputs_available": len(missing_inputs) == 0,
         "report_markdown": str(OUT_MD),
         "report_html": str(OUT_HTML),
         "stage_status": stage_status,
+        "stage_labels": stage_labels,
         "strict_note": (
             "V1F generates a report from public validation artifacts only. "
-            "It does not import, read, hash, or expose private kernel source code."
+            "Stages marked SKIPPED_PUBLIC_MODE are expected public-mode outcomes "
+            "when the proprietary adapter is not included in the repository. "
+            "V1F does not import, read, hash, or expose private kernel source code."
         ),
     }
 
@@ -77,12 +114,17 @@ def main() -> None:
     md_lines.append("|---|---|")
 
     for stage in INPUTS:
-        md_lines.append(f"| {stage} | {yesno(stage_status.get(stage, False))} |")
+        md_lines.append(f"| {stage} | {stage_labels.get(stage, 'MISSING')} |")
 
     md_lines.append("")
     md_lines.append("## Summary")
     md_lines.append("")
-    md_lines.append(f"- All V1A to V1E passed: `{all_pass}`")
+    md_lines.append(
+        f"- Public validation complete: `{public_validation_complete}`"
+    )
+    md_lines.append(
+        f"- All required inputs available: `{len(missing_inputs) == 0}`"
+    )
     md_lines.append(f"- Missing inputs: `{len(missing_inputs)}`")
     md_lines.append("")
     md_lines.append("## Strict Interpretation")
@@ -93,6 +135,7 @@ def main() -> None:
     for stage, data in reports.items():
         md_lines.append(f"## {stage}")
         md_lines.append("")
+
         if data is None:
             md_lines.append("Missing input report.")
             md_lines.append("")
@@ -115,19 +158,30 @@ def main() -> None:
         html_body += (
             "<tr>"
             f"<td>{escape(stage)}</td>"
-            f"<td>{escape(yesno(stage_status.get(stage, False)))}</td>"
+            f"<td>{escape(stage_labels.get(stage, 'MISSING'))}</td>"
             "</tr>"
         )
 
     html_body += "</table>\n"
     html_body += "<h2>Summary</h2>\n"
-    html_body += f"<p>All V1A to V1E passed: <code>{escape(str(all_pass))}</code></p>\n"
-    html_body += f"<p>Missing inputs: <code>{escape(str(len(missing_inputs)))}</code></p>\n"
+    html_body += (
+        f"<p>Public validation complete: "
+        f"<code>{escape(str(public_validation_complete))}</code></p>\n"
+    )
+    html_body += (
+        f"<p>All required inputs available: "
+        f"<code>{escape(str(len(missing_inputs) == 0))}</code></p>\n"
+    )
+    html_body += (
+        f"<p>Missing inputs: "
+        f"<code>{escape(str(len(missing_inputs)))}</code></p>\n"
+    )
     html_body += "<h2>Strict Interpretation</h2>\n"
     html_body += f"<p>{escape(summary['strict_note'])}</p>\n"
 
     for stage, data in reports.items():
         html_body += f"<h2>{escape(stage)}</h2>\n"
+
         if data is None:
             html_body += "<p>Missing input report.</p>\n"
         else:
@@ -155,11 +209,13 @@ def main() -> None:
     print("MARKDOWN:", OUT_MD)
     print("HTML:", OUT_HTML)
     print("JSON:", OUT_JSON)
-    print("PASS_V1F:", all_pass)
+    print("PUBLIC_VALIDATION_COMPLETE:", public_validation_complete)
     print("=" * 80)
 
-    if not all_pass:
-        raise SystemExit("V1F FAILED: one or more V1A-V1E inputs missing or not passing")
+    if not public_validation_complete:
+        raise SystemExit(
+            "V1F FAILED: one or more required inputs are missing or invalid"
+        )
 
     print("V1F PASSED")
 
