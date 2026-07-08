@@ -102,6 +102,8 @@ Therefore, when the adapter is unavailable:
 - this behavior is expected for the public repository;
 - the absence of the proprietary adapter does not invalidate the public documentation or validation artifacts.
 
+In public-only mode, V1B may report `pass_v1b: false` when the private adapter is not available. This is an expected outcome of the public repository configuration and should not be interpreted as a failure of the public validation framework.
+
 ---
 
 ## Environment Configuration
