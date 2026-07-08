@@ -113,6 +113,23 @@ For a claim-by-claim mapping between scientific statements, supporting evidence,
 
 ---
 
+## Evidence Policy
+
+This repository follows an evidence-based documentation policy.
+
+Scientific claims are made only when supported by publicly documented experimental evidence.
+
+Accordingly, the repository adopts the following principles:
+
+- benchmark results are reported only for experimentally evaluated configurations;
+- undocumented experiments are not used to support scientific claims;
+- theoretical expectations are clearly distinguished from experimental observations;
+- future work is explicitly distinguished from validated results.
+
+The absence of a claim should not be interpreted as evidence against a particular result. It indicates only that no publicly documented experimental evidence is currently provided in this repository for that specific claim.
+
+---
+
 # Public Validation and Reproducibility Framework for Sparse-Local Attention Research
 
 The **Lanzarini Validation Suite** is an open scientific validation framework designed to improve transparency, reproducibility and independent verification of sparse-local attention research.
