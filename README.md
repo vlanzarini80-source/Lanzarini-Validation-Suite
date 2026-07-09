@@ -289,7 +289,7 @@ The public repository intentionally excludes the proprietary sparse-local attent
 
 Instead, it enables independent verification of the published validation workflow, benchmark methodology, reproducibility pipeline and artifact integrity.
 
-Public Mode
+# Public Mode
 
 The public repository validates the validation framework itself.
 
@@ -301,6 +301,8 @@ When the proprietary adapter is not available:
 • V1B may PASS or SKIPPED_PUBLIC_MODE.
 • V1C and V1D are expected to report SKIPPED_PUBLIC_MODE.
 • V1F reports the public validation workflow as complete.
+
+The public repository validates the public validation framework and its reproducibility workflow.
 
 ---
 
