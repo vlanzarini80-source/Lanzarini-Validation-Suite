@@ -289,6 +289,19 @@ The public repository intentionally excludes the proprietary sparse-local attent
 
 Instead, it enables independent verification of the published validation workflow, benchmark methodology, reproducibility pipeline and artifact integrity.
 
+Public Mode
+
+The public repository validates the validation framework itself.
+
+The proprietary Triton kernel is intentionally excluded.
+
+When the proprietary adapter is not available:
+
+• V1A and V1E execute normally.
+• V1B may PASS or SKIPPED_PUBLIC_MODE.
+• V1C and V1D are expected to report SKIPPED_PUBLIC_MODE.
+• V1F reports the public validation workflow as complete.
+
 ---
 
 # Visual Overview
