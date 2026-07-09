@@ -229,37 +229,34 @@ The Validation Suite focuses on reproducibility, transparency and independent ve
 
 ---
 
-# Quick Start
-
-The public Validation Suite can be executed in only a few minutes.
+## Quick Start
 
 Clone the repository:
 
 ```bash
 git clone https://github.com/vlanzarini80-source/Lanzarini-Validation-Suite.git
-
 cd Lanzarini-Validation-Suite
 ```
 
-Install the required dependencies:
+Run the public validation stages:
 
 ```bash
-pip install -r requirements.txt
+python scripts/scripts/v1a_environment_check.py
+python scripts/scripts/v1b_adapter_contract.py
+python scripts/scripts/v1c_micro_correctness.py
+python scripts/scripts/v1d_runtime_benchmark.py
+python scripts/scripts/v1e_artifact_manifest.py
+python scripts/scripts/v1f_report_generator.py
 ```
 
-Run the public validation workflow:
+Expected public-mode behavior:
 
-```bash
-python scripts/v1a_environment_check.py
-
-# Optional (requires the private adapter)
-python scripts/v1b_adapter_contract.py
-
-python scripts/v1c_micro_correctness.py
-python scripts/v1d_runtime_benchmark.py
-python scripts/v1e_artifact_manifest.py
-python scripts/v1f_report_generator.py
-```
+- **V1A** → PASS
+- **V1B** → PASS or SKIPPED_PUBLIC_MODE (depending on whether a proprietary adapter is available)
+- **V1C** → SKIPPED_PUBLIC_MODE (without the proprietary adapter)
+- **V1D** → SKIPPED_PUBLIC_MODE (without the proprietary adapter)
+- **V1E** → PASS
+- **V1F** → PASSED (`PUBLIC_VALIDATION_COMPLETE: True`)
 
 > **Public Repository Note**
 >
