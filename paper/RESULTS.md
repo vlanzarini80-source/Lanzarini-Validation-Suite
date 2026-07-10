@@ -226,3 +226,145 @@ The path documents the original runtime location.
 It does not prove that the original byte-identical JSON artifact is currently present in this public repository. 
 
 ---
+
+# V56B-LITE — Transition-Band Sweep
+
+## Purpose
+
+V56B-LITE evaluated the transition region between Lanzarini G4 and FlashAttention using a fixed benchmark protocol and a small grid of sequence lengths and local-window ratios.
+
+The purpose was to determine whether the faster backend changed across the tested operating region.
+
+This checkpoint reports only the measured grid and does not establish a universal backend-selection rule.
+
+## Recorded Environment
+
+The preserved checkpoint records:
+
+- GPU: NVIDIA A100-SXM4-80GB
+- PyTorch: 2.8.0+cu128
+- Triton: 3.4.0
+- FlashAttention available: true
+- Sequence lengths: `T = [12288, 16384, 20480, 24576]`
+- Target ratios: `[0.006, 0.012]`
+- Number of evaluated rows: 8
+- Number of execution errors: 0
+- `pass_v56b_lite = true`
+
+## Row-Level Results
+
+A positive delta means Lanzarini G4 was faster than FlashAttention.
+
+A negative delta means FlashAttention was faster than Lanzarini G4.
+
+| T | W | W/T | FlashAttention ms | Lanzarini G4 ms | Delta vs Flash (%) | Winner |
+|---:|---:|---:|---:|---:|---:|---|
+| 12288 | 64 | 0.0052083333 | 0.0811349265 | 0.0537525602 | 33.7492 | Lanzarini G4 |
+| 12288 | 160 | 0.0130208333 | 0.0790898502 | 0.0584674291 | 26.0747 | Lanzarini G4 |
+| 16384 | 96 | 0.0058593750 | 0.0809719563 | 0.0771322884 | 4.7420 | Lanzarini G4 |
+| 16384 | 192 | 0.0117187500 | 0.0795073435 | 0.0771279149 | 2.9927 | Lanzarini G4 |
+| 20480 | 128 | 0.0062500000 | 0.0799075589 | 0.0930313095 | -16.4237 | FlashAttention |
+| 20480 | 256 | 0.0125000000 | 0.0849486478 | 0.1310458928 | -54.2648 | FlashAttention |
+| 24576 | 160 | 0.0065104167 | 0.1027208343 | 0.1111833192 | -8.2383 | FlashAttention |
+| 24576 | 288 | 0.0117187500 | 0.1297893934 | 0.1591762938 | -22.6420 | FlashAttention |
+
+## Winner Distribution
+
+The preserved summary reports:
+
+| Backend | Number of wins |
+|---|---:|
+| Lanzarini G4 | 4 |
+| FlashAttention | 4 |
+| Parity | 0 |
+
+The winner changed between the tested sequence-length regions:
+
+- Lanzarini G4 won all tested rows at `T = 12288`;
+- Lanzarini G4 won all tested rows at `T = 16384`;
+- FlashAttention won all tested rows at `T = 20480`;
+- FlashAttention won all tested rows at `T = 24576`.
+
+## Aggregated Results by Sequence Length
+
+### T = 12288
+
+- Tested windows: `W = [64, 160]`
+- Lanzarini G4 wins: 2
+- FlashAttention wins: 0
+- Mean reported delta: **29.9119%**
+- Largest tested window won by Lanzarini G4: `W = 160`
+
+### T = 16384
+
+- Tested windows: `W = [96, 192]`
+- Lanzarini G4 wins: 2
+- FlashAttention wins: 0
+- Mean reported delta: **3.8673%**
+- Largest tested window won by Lanzarini G4: `W = 192`
+
+### T = 20480
+
+- Tested windows: `W = [128, 256]`
+- Lanzarini G4 wins: 0
+- FlashAttention wins: 2
+- Mean reported delta: **-35.3443%**
+- Smallest tested window won by FlashAttention: `W = 128`
+
+### T = 24576
+
+- Tested windows: `W = [160, 288]`
+- Lanzarini G4 wins: 0
+- FlashAttention wins: 2
+- Mean reported delta: **-15.4402%**
+- Smallest tested window won by FlashAttention: `W = 160`
+
+## Interpretation
+
+The measured winner changed across the tested `(T, W)` region.
+
+For the tested shapes:
+
+- Lanzarini G4 was faster at `T = 12288` and `T = 16384`;
+- FlashAttention was faster at `T = 20480` and `T = 24576`.
+
+The measured advantage of Lanzarini G4 decreased substantially near `T = 16384`:
+
+- `4.7420%` at `T = 16384, W = 96`;
+- `2.9927%` at `T = 16384, W = 192`.
+
+At the next tested sequence length, `T = 20480`, FlashAttention became faster:
+
+- `16.4237%` advantage at `W = 128`;
+- `54.2648%` advantage at `W = 256`.
+
+These observations support the existence of a transition region in the tested grid.
+
+They do not prove that the transition occurs at one exact universal sequence length, nor that a single threshold generalizes to untested hardware, software versions, dimensions, or window sizes.
+
+## Strict Interpretation
+
+V56B-LITE provides measured evidence that neither backend was universally faster across the tested grid.
+
+The result supports a regime-dependent backend-selection problem.
+
+It does not establish:
+
+- a universal frontier;
+- a hardware-independent rule;
+- performance outside the tested configurations;
+- generalization to different head dimensions, data types, batch sizes, or GPU architectures.
+
+## Archived Runtime Path
+
+The preserved runtime location was:
+
+```text
+/workspace/lanzarini_v35/runtime_results/
+v56b_lite_transition_band_sweep/
+v56b_lite_transition_band_sweep.json
+```
+
+This path records the original runtime location.
+
+It does not by itself prove that the original byte-identical JSON artifact is currently included in the public repository. 
