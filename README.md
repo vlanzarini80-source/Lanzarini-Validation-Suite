@@ -450,6 +450,8 @@ Scientific conclusions remain limited to experimentally evaluated configurations
 
 # Backend Evaluation Scope
 
+![Backend Evaluation Scope](figures/backend_evaluation_scope.png)
+
 Experimental evidence indicates that backend performance depends on the evaluated configuration.
 
 Accordingly, backend comparisons should be interpreted only within the documented benchmark conditions.
