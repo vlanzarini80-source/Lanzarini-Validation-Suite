@@ -1,6 +1,6 @@
 # Lanzarini Validation Suite
 
-https://zenodo.org/badge/1284306738.svg
+[![DOI](https://zenodo.org/badge/1284306738.svg)](https://doi.org/10.5281/zenodo.21313913)
 
 > **Public validation and reproducibility framework for sparse-local attention research.**
 
