@@ -1,5 +1,11 @@
 # Method
 
+This document provides the canonical methodological overview of the Lanzarini Validation Suite.
+
+Additional implementation-oriented validation details are documented in the files under the `docs/` directory.
+
+When differences in wording exist, this document should be considered the primary methodological reference for the public repository.
+
 ## Purpose
 
 This document describes the methodological structure of the Lanzarini Validation Suite.
