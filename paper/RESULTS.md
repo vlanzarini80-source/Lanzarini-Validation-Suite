@@ -1,5 +1,73 @@
 # Experimental Results
 
+## Overview
+
+This document provides a consolidated overview of the public experimental checkpoints currently documented in the Lanzarini Validation Suite.
+
+Each checkpoint summarizes one experimentally documented stage of the research program.
+
+The proprietary Triton implementation is intentionally excluded from this repository.
+
+---
+
+## Public Experimental Timeline
+
+| Checkpoint | Topic | Status |
+|------------|--------|--------|
+| V42D-A-R | Native vLLM adapter validation | ✅ |
+| V43A | Adapter performance analysis | ✅ |
+| V44A-2M | Micro paged-native correctness | ✅ |
+| V48A-2R | Sparse-local energy validation | ✅ |
+| V52D-R2-FIX | Corrected FlashAttention comparison | ✅ |
+| V56A | Blind router validation | ✅ |
+| V56B-LITE | Transition-band sweep | ✅ |
+| V56G-R | Corrected blind router validation | ✅ |
+| V56H-LOCK | Boundary validation | ✅ |
+| V56I-LOCK | Corrected boundary validation | ✅ |
+| V57C | FlashAttention correctness validation | ✅ |
+| V58A | FlashAttention head-to-head benchmark | ✅ |
+| V58B | Backend comparison summary | ✅ |
+| V59A | Interpretable backend-selection rule | ✅ |
+| V60A-LITE | Dense frontier validation | ✅ |
+| V61B | Transition-region interpretation | ✅ |
+
+---
+
+## Individual Reports
+
+| Report | Description |
+|---------|-------------|
+| [V42D-A-R](results/V42D-A-R.md) | Native vLLM adapter validation. |
+| [V43A](results/V43A.md) | End-to-end adapter performance analysis. |
+| [V44A-2M](results/V44A-2M.md) | Micro paged-native correctness audit. |
+| [V48A-2R](results/V48A-2R.md) | Sparse-local energy repeat-loop validation. |
+| [V52D-R2-FIX](results/V52D-R2-FIX.md) | Canonical corrected benchmark versus FlashAttention. |
+| [V56A](results/V56A.md) | Blind router validation. |
+| [V56B-LITE](results/V56B-LITE.md) | Transition-band sweep. |
+| [V56G-R](results/V56G-R.md) | Corrected blind-router validation. |
+| [V56H-LOCK](results/V56H-LOCK.md) | Boundary validation campaign. |
+| [V56I-LOCK](results/V56I-LOCK.md) | Corrected boundary validation. |
+| [V57C](results/V57C.md) | FlashAttention correctness validation against SDPA. |
+| [V58A](results/V58A.md) | Direct benchmark comparison. |
+| [V58B](results/V58B.md) | Backend winner extraction. |
+| [V59A](results/V59A.md) | Empirical backend-selection rule. |
+| [V60A-LITE](results/V60A-LITE.md) | Dense empirical frontier mapping. |
+| [V61B](results/V61B.md) | Transition-region analysis. |
+
+---
+
+## Evidence Policy
+
+The checkpoint reports contain different levels of preserved evidence.
+
+Some reports include detailed experimental measurements.
+
+Others preserve validated summaries because the original row-level artifacts are no longer publicly available.
+
+Each report explicitly documents its own evidence scope and limitations.
+
+---
+
 ## Scope
 
 This document reports only experimental results obtained during the Lanzarini project.
