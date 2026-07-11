@@ -10,6 +10,18 @@ It does not imply correctness of any particular implementation strategy, GPU ker
 
 ---
 
+## Canonical Reference
+
+The canonical mathematical definition of the evaluated operator is maintained in:
+
+- `docs/SPECIFICATION.md`
+
+This document defines only the correctness criteria used to evaluate implementations of that operator.
+
+It should be interpreted together with the mathematical specification, not as an independent operator definition.
+
+---
+
 ## Mathematical Reference
 
 The reference operator is the sparse-local causal attention operator defined in:
