@@ -8,6 +8,20 @@ Its purpose is to clarify which publicly reported benchmark results are supporte
 
 ---
 
+## Canonical Scope
+
+This document defines the scope and interpretation of benchmark evidence reported by the Lanzarini Validation Suite.
+
+It should be interpreted together with:
+
+- `paper/METHOD.md`
+- `docs/SPECIFICATION.md`
+- `docs/CORRECTNESS.md`
+
+This document defines only the interpretation and limits of benchmark evidence. It does not define the mathematical operator or the validation methodology.
+
+---
+
 ## Scope
 
 The Validation Suite publicly reports only benchmark results that have been experimentally executed and documented.
