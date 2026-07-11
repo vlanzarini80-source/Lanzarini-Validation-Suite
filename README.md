@@ -1,324 +1,323 @@
 # Lanzarini Validation Suite
 
-![Validation](https://img.shields.io/badge/Validation-PASS-brightgreen)
-![Python](https://img.shields.io/badge/Python-3.11-blue)
-![CUDA](https://img.shields.io/badge/CUDA-Tested-green)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.4.1-orange)
-![Triton](https://img.shields.io/badge/Triton-3.0.0-orange)
-![Research](https://img.shields.io/badge/Research-Reproducible-purple)
-![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+> **Public validation and reproducibility framework for sparse-local attention research.**
+
+![Validation](https://img.shields.io/badge/Validation-Stable-brightgreen)
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![CUDA](https://img.shields.io/badge/CUDA-Supported-green)
+![PyTorch](https://img.shields.io/badge/PyTorch-Tested-red)
+![Triton](https://img.shields.io/badge/Triton-Compatible-orange)
+![Research](https://img.shields.io/badge/Research-Public-blueviolet)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
 ---
 
-## Table of Contents
+# Overview
 
-- [Current Status](#current-status)
-- [Repository Scope](#repository-scope)
-- [Documentation](#documentation)
-- [Scientific Positioning](#scientific-positioning)
-- [Research Claims](#research-claims)
-- [Evidence Policy](#evidence-policy)
-- [Objectives](#objectives)
-- [Motivation](#motivation)
-- [Repository at a Glance](#repository-at-a-glance)
-- [Quick Start](#quick-start)
-- [Experimental Results and Checkpoints](#experimental-results-and-checkpoints)
-- [Validation Pipeline](#validation-pipeline)
-- [Repository Structure](#repository-structure)
-- [Scientific Scope](#scientific-scope)
-- [Backend Evaluation Scope](#backend-evaluation-scope)
-- [Reproducibility](#reproducibility)
-- [Citation](#citation)
-- [License](#license)
+The **Lanzarini Validation Suite** is a public scientific framework designed to support transparent validation, reproducibility, and independent inspection of sparse-local attention research.
+
+Unlike repositories that primarily distribute optimized implementations, this project focuses on documenting **how experimental evidence is generated, validated, interpreted, and reproduced**.
+
+The repository intentionally separates:
+
+- mathematical specification;
+- public validation methodology;
+- correctness evaluation;
+- benchmark documentation;
+- reproducibility workflow;
+- experimental evidence;
+- proprietary implementation.
+
+The proprietary Triton implementation remains intentionally excluded from the public repository.
 
 ---
 
-## Current Status
+# Current Status
 
-**Repository Status:** Stable
+**Repository status**
 
-## Repository Guide
+✅ Stable Public Release
 
-The repository is organized into the following primary sections:
+Current validation progress:
 
-| Location | Purpose |
-|----------|---------|
-| `README.md` | Project overview and quick start. |
-| `ROADMAP.md` | Development roadmap and future milestones. |
-| `PROJECT_STATUS.md` | Current validation status. |
-| `paper/RESULTS.md` | Consolidated overview of experimental checkpoints. |
-| `paper/results/` | Individual experimental checkpoint reports (V42–V61). |
-| `docs/` | Public documentation and methodology. |
-| `reports/` | Validation reports and supporting documentation. |
-| `artifacts/` | Public JSON and CSV artifacts. |
-| `scripts/` | Public validation scripts. |
-
-### Public Validation Progress
-
-| Validation Stage | Status |
-|------------------|--------|
+| Stage | Status |
+|--------|--------|
 | V1 | ✅ Complete |
 | V2 | ✅ Complete |
 | V3 | ✅ Complete |
 
-### Current Repository Features
+Current public capabilities include:
 
-- ✅ Public validation reports
-- ✅ Reproducibility documentation
-- ✅ Artifact package builder
-- ✅ SHA-256 integrity verification
-- ✅ GitHub Actions continuous validation
-
----
-
-## Repository Scope
-
-This repository is exclusively dedicated to the public validation and reproducibility framework for sparse-local attention research conducted within the Lanzarini Validation Suite.
-
-It documents the mathematical operator, public validation methodology, experimental evidence, reproducibility workflow, and validation artifacts associated with this research.
-
-This repository does **not** include, describe, validate, or support unrelated research projects, mathematical models, or experimental hypotheses that may exist in separate repositories maintained by the same author.
-
-Any reference to other repositories should be considered independent unless explicitly stated in this repository. 
+- Public validation workflow
+- Reproducibility documentation
+- Machine-readable validation artifacts
+- SHA-256 integrity verification
+- GitHub Actions continuous validation
+- Public benchmark reports
 
 ---
 
-## Documentation
+# Repository Scope
 
-The technical documentation for the public Validation Suite is available in the `docs/` directory.
+This repository documents the public validation component of the Lanzarini sparse-local attention research project.
+
+The repository includes:
+
+- mathematical specification;
+- validation methodology;
+- correctness criteria;
+- benchmark scope;
+- computational complexity;
+- reproducibility workflow;
+- public validation artifacts;
+- experimental checkpoint reports.
+
+The repository intentionally **does not** include:
+
+- proprietary Triton kernels;
+- backend-selection implementation;
+- production inference code;
+- private research code.
+
+The objective is to maximize scientific transparency while preserving implementation confidentiality.
+
+---
+
+# Scientific Position
+
+The Validation Suite does **not** claim:
+
+- a novel sparse-local attention operator;
+- a new Transformer architecture;
+- a new foundation model;
+- universal runtime superiority;
+- universal energy reduction.
+
+Instead, the repository provides:
+
+- documented experimental methodology;
+- reproducible validation procedures;
+- publicly inspectable evidence;
+- transparent interpretation of measured results.
+
+Scientific conclusions are always limited to the documented experimental configurations.
+
+---
+
+# Repository Guide
+
+The repository is organized into five complementary sections.
+
+| Section | Purpose |
+|----------|---------|
+| `README.md` | Project overview |
+| `docs/` | Technical documentation |
+| `paper/` | Scientific reports and consolidated results |
+| `reports/` | Validation reports |
+| `artifacts/` | Public validation artifacts |
+
+---
+
+# Documentation
+
+The complete technical documentation is available inside the **docs/** directory.
 
 | Document | Purpose |
 |----------|---------|
-| [`SPECIFICATION.md`](docs/SPECIFICATION.md) | Mathematical specification of the sparse-local attention operator. |
-| [`COMPLEXITY.md`](docs/COMPLEXITY.md) | Computational complexity of the documented operator. |
-| [`CORRECTNESS.md`](docs/CORRECTNESS.md) | Correctness criteria used during validation. |
-| [`ADAPTER_INTERFACE.md`](docs/ADAPTER_INTERFACE.md) | Public adapter interface specification. |
-| [VALIDATION_METHOD.md](docs/VALIDATION_METHOD.md) | Public validation methodology |
-| [`BENCHMARK_SCOPE.md`](docs/BENCHMARK_SCOPE.md) | Scope of reported benchmark evidence. |
-| [`LIMITATIONS.md`](docs/LIMITATIONS.md) | Known limitations and interpretation boundaries. |
-| [`paper/RESULTS.md`](paper/RESULTS.md) | Consolidated experimental results and checkpoint overview. |
+| `SPECIFICATION.md` | Mathematical specification of the sparse-local attention operator |
+| `COMPLEXITY.md` | Computational complexity analysis |
+| `CORRECTNESS.md` | Correctness criteria |
+| `ADAPTER_INTERFACE.md` | Public adapter interface |
+| `VALIDATION_METHOD.md` | Public validation methodology |
+| `BENCHMARK_SCOPE.md` | Benchmark interpretation and scope |
+| `LIMITATIONS.md` | Known limitations |
+
+Additional scientific documentation is available in:
+
+| Document | Purpose |
+|----------|---------|
+| `paper/METHOD.md` | Canonical methodological reference |
+| `paper/RESULTS.md` | Consolidated experimental results |
+| `paper/CLAIM_LEDGER.md` | Evidence-based scientific claim mapping |
 
 ---
 
-## Experimental Results and Checkpoints
+# Experimental Results
 
-The repository includes public summaries of selected experimental checkpoints from the Lanzarini sparse-local attention research program.
+The repository contains public summaries of experimentally validated checkpoints from the Lanzarini sparse-local attention research program.
 
-These reports document preserved measurements, correctness outcomes, benchmark observations, methodological corrections, and known limitations.
+These reports preserve:
 
-The proprietary Triton implementation is not included.
+- numerical correctness evaluations;
+- runtime measurements;
+- benchmark observations;
+- validation methodology;
+- documented limitations;
+- reproducible experimental artifacts.
 
-### Consolidated Results
+The proprietary implementation is intentionally excluded.
 
-- [`paper/RESULTS.md`](paper/RESULTS.md) — consolidated experimental results, including V52D-R2-FIX, V56A blind-router validation, and V56B-LITE transition-band measurements.
-- [`paper/VALIDATION_OVERVIEW.md`](paper/VALIDATION_OVERVIEW.md) — high-level overview of the public validation workflow.
+The published reports describe only experimentally evaluated configurations.
 
-### Individual Checkpoint Reports
-
-| Checkpoint | Experimental topic | Public report |
-|---|---|---|
-| V42D-A-R | Native vLLM integration validation | [`V42D-A-R.md`](paper/results/V42D-A-R.md) |
-| V43A | End-to-end adapter performance and reconstruction bottleneck | [`V43A.md`](paper/results/V43A.md) |
-| V44A-2M | Micro paged-native reference correctness audit | [`V44A-2M.md`](paper/results/V44A-2M.md) |
-| V48A-2R | NVML sparse-local energy repeat-loop audit | [`V48A-2R.md`](paper/results/V48A-2R.md) |
-| V52D-R2-FIX | Corrected Lanzarini G4 vs FlashAttention benchmark | [`V52D-R2-FIX.md`](paper/results/V52D-R2-FIX.md) |
-| V56G-R | Corrected blind-router validation | [`V56G-R.md`](paper/results/V56G-R.md) |
-| V56H-LOCK | Boundary validation | [`V56H-LOCK.md`](paper/results/V56H-LOCK.md) |
-| V56I-LOCK | Corrected boundary-router validation | [`V56I-LOCK.md`](paper/results/V56I-LOCK.md) |
-| V57C | FlashAttention correctness validation against SDPA | [`V57C.md`](paper/results/V57C.md) |
-| V58A | FlashAttention vs Lanzarini head-to-head benchmark | [`V58A.md`](paper/results/V58A.md) |
-| V58B | Measured backend-winner extraction | [`V58B.md`](paper/results/V58B.md) |
-| V59A | Interpretable backend-router learning | [`V59A.md`](paper/results/V59A.md) |
-| V60A-LITE | Dense empirical frontier sweep | [`V60A-LITE.md`](paper/results/V60A-LITE.md) |
-| V61B | Two-dimensional frontier interpretation | [`V61B.md`](paper/results/V61B.md) |
-
-### Interpretation
-
-The checkpoint reports contain different levels of preserved evidence.
-
-Some reports include row-level numerical measurements, while others contain only preserved experimental summaries because the original byte-identical JSON or CSV artifacts have not yet been recovered or published.
-
-Each report states its own evidence scope and limitations.
-
-The reported results:
-
-- apply only to the documented experimental configurations;
-- do not establish universal performance or energy superiority;
-- do not demonstrate generalization to untested hardware or workloads;
-- do not expose the proprietary kernel implementation.
+No undocumented experiments are used to support scientific claims.
 
 ---
 
-## Scientific Positioning
+# Experimental Evidence
 
-This repository documents a public validation and reproducibility framework for a sparse-local attention operator.
+The Validation Suite preserves public evidence generated during multiple validation campaigns.
 
-The mathematical operator documented in this repository follows the standard sparse-local (sliding-window) causal attention formulation.
+Representative experimental topics include:
 
-This repository does **not** claim the introduction of a novel sparse-local attention operator or mathematical formulation.
+- correctness validation;
+- runtime benchmarking;
+- benchmark reproducibility;
+- validation artifact generation;
+- SHA-256 integrity verification;
+- backend comparison under documented benchmark configurations.
 
-Instead, the primary contribution of this repository is the development of a public framework for:
+Some reports contain complete row-level measurements.
 
-- rigorous validation;
-- experimental reproducibility;
-- correctness evaluation;
-- benchmark documentation;
-- transparent reporting of experimentally observed results.
+Others preserve consolidated summaries when the original raw artifacts are unavailable.
 
-The proprietary implementation remains outside the scope of this public repository.
-
-No claim is made that the mathematical formulation presented in this repository is novel.
-
----
-
-## Research Claims
-
-This repository makes only limited, evidence-based claims.
-
-### What this repository claims
-
-This repository claims that it provides:
-
-- a public validation and reproducibility framework for sparse-local attention research;
-- a documented mathematical specification of the evaluated operator;
-- public validation scripts and artifacts;
-- documented correctness, complexity, benchmark scope, and limitation statements;
-- a reproducibility-oriented workflow for inspecting reported experimental evidence.
-
-### What this repository does not claim
-
-This repository does **not** claim:
-
-- a novel mathematical attention formulation;
-- universal performance superiority;
-- universal energy savings;
-- correctness outside documented validation conditions;
-- benchmark validity outside experimentally evaluated configurations;
-- disclosure of the proprietary implementation.
-
-All performance, correctness, and reproducibility statements should be interpreted only within the scope documented in the validation artifacts and technical documentation.
-
-For a claim-by-claim mapping between scientific statements, supporting evidence, limitations, and validation status, see [`paper/CLAIM_LEDGER.md`](paper/CLAIM_LEDGER.md).
+Each report explicitly states its own scope and limitations.
 
 ---
 
-## Evidence Policy
+# Evidence Policy
 
-This repository follows an evidence-based documentation policy.
+The repository follows a strict evidence-based documentation policy.
 
 Scientific claims are made only when supported by publicly documented experimental evidence.
 
-Accordingly, the repository adopts the following principles:
+Accordingly:
 
-- benchmark results are reported only for experimentally evaluated configurations;
-- undocumented experiments are not used to support scientific claims;
-- theoretical expectations are clearly distinguished from experimental observations;
-- future work is explicitly distinguished from validated results.
+- experimentally validated results are clearly distinguished from theoretical discussion;
+- future work is explicitly identified as future work;
+- undocumented experiments are never used to support scientific conclusions;
+- benchmark observations are limited to the tested configurations.
 
-The absence of a claim should not be interpreted as evidence against a particular result. It indicates only that no publicly documented experimental evidence is currently provided in this repository for that specific claim.
+The absence of a claim should not be interpreted as evidence against a result.
+
+It only indicates that no public experimental evidence is currently provided by this repository.
 
 ---
 
-# Public Validation and Reproducibility Framework for Sparse-Local Attention Research
+# Research Claims
 
-The **Lanzarini Validation Suite** is an open scientific validation framework designed to improve transparency, reproducibility and independent verification of sparse-local attention research.
+The Validation Suite makes only limited evidence-based claims.
 
-Rather than introducing a new attention algorithm or a new foundation model, the repository provides a structured validation workflow that enables publicly reproducible experimental validation while intentionally separating public validation infrastructure from proprietary implementation details.
+## Supported Claims
 
-The Validation Suite enables researchers, engineers and reviewers to inspect validation procedures, reproduce published validation artifacts, verify benchmark outputs and audit package integrity without requiring access to proprietary GPU kernel implementations.
+The repository publicly documents:
+
+- a reproducible validation workflow;
+- a mathematical specification of the evaluated operator;
+- correctness evaluation methodology;
+- computational complexity analysis;
+- benchmark interpretation guidelines;
+- validation artifacts;
+- reproducibility procedures.
+
+---
+
+## Explicit Non-Claims
+
+This repository does **not** claim:
+
+- a novel attention mechanism;
+- universal performance superiority;
+- universal energy reduction;
+- correctness outside documented benchmark configurations;
+- disclosure of proprietary implementation details.
+
+Scientific conclusions remain limited to the documented experimental evidence.
+
+For a complete mapping between claims, supporting evidence and limitations, see:
+
+`paper/CLAIM_LEDGER.md`
+
+---
+
+# Public Validation Framework
+
+The Validation Suite is designed to improve scientific transparency.
+
+Instead of publishing only benchmark numbers, the repository documents the complete validation process.
+
+The public framework includes:
+
+- validation methodology;
+- correctness evaluation;
+- benchmark protocols;
+- reproducibility workflow;
+- artifact generation;
+- integrity verification.
+
+This separation allows independent inspection without exposing proprietary implementation details.
 
 ---
 
 # Objectives
 
-The Validation Suite has the following goals:
+The Validation Suite has the following objectives:
 
-- provide a transparent validation workflow;
-- verify numerical correctness of public experiments;
-- benchmark runtime execution under controlled conditions;
-- evaluate runtime stability;
-- generate reproducible experimental artifacts;
-- produce machine-readable validation reports;
-- verify artifact integrity through SHA-256 manifests;
-- support independent scientific verification.
+- improve reproducibility;
+- support independent verification;
+- document benchmark methodology;
+- evaluate numerical correctness;
+- preserve experimental evidence;
+- generate machine-readable artifacts;
+- verify artifact integrity.
 
-The repository is designed to maximize reproducibility while preserving the confidentiality of proprietary implementation details.
+The project emphasizes reproducibility before performance claims.
 
 ---
 
 # Motivation
 
-Experimental evaluation of GPU attention kernels is often difficult to reproduce because implementations, benchmark protocols and validation procedures are rarely published in a consistent form.
+GPU attention benchmarks are often difficult to reproduce because implementations, benchmark procedures and validation protocols are rarely documented in a consistent manner.
 
-The Validation Suite addresses this problem by providing a structured validation pipeline documenting:
+The Validation Suite addresses this problem by documenting:
 
 - execution environment;
-- validation methodology;
-- numerical correctness;
-- runtime measurements;
+- validation workflow;
+- mathematical specification;
+- correctness methodology;
+- benchmark procedures;
 - generated artifacts;
 - integrity verification.
 
-The repository focuses on scientific reproducibility rather than algorithm implementation.
-
----
-
-# Problem
-
-Modern AI systems increasingly rely on Transformer architectures for inference.
-
-As sequence length grows, attention computation becomes one of the primary contributors to GPU execution time, memory traffic and energy consumption.
-
-The Lanzarini Validation Suite does **not** introduce a new foundation model and does **not** claim a universally superior attention implementation.
-
-Instead, it provides a transparent and reproducible experimental framework for evaluating sparse-local attention implementations under controlled benchmark conditions.
-
-Its objective is to determine, through experimentally validated evidence, under which configurations different attention backends provide measurable advantages.
+The repository focuses on scientific validation rather than implementation disclosure.
 
 ---
 
 # Why It Matters
 
-Even modest improvements in inference efficiency can translate into meaningful infrastructure savings when AI systems are deployed at scale.
+Reliable validation infrastructure benefits the research community by enabling:
+
+- independent verification;
+- transparent benchmarking;
+- reproducible experimentation;
+- long-term preservation of experimental evidence.
 
 Potential application domains include:
 
-- Large Language Models (LLMs)
+- Large Language Models
 - AI inference infrastructure
-- GPU inference engines
+- GPU kernel research
 - Edge AI
 - Vision Transformers
-- Speech AI
+- Scientific computing
 - Robotics
-- Long-sequence scientific computing
+- Long-context inference
 - Time-series AI
-- Scientific AI workloads
 
-Rather than promoting a specific implementation, the Validation Suite emphasizes transparent measurement, reproducibility and independent verification.
-
----
-
-# Repository at a Glance
-
-The public repository provides a transparent validation and reproducibility framework designed to facilitate independent scientific verification of sparse-local attention research.
-
-Current public capabilities include:
-
-- ✅ Public validation and reproducibility framework
-- ✅ Reproducible validation workflow
-- ✅ Machine-readable validation artifacts (JSON, CSV, Markdown and HTML)
-- ✅ SHA-256 artifact integrity verification
-- ✅ Continuous validation through GitHub Actions
-- ✅ Configuration-specific experimental evidence
-- ✅ Public documentation and reproducibility reports
-
-The proprietary sparse-local attention kernel implementation and backend-selection logic are intentionally excluded from the public repository.
-
-The Validation Suite focuses on reproducibility, transparency and independent verification of experimentally validated public artifacts rather than distribution of proprietary implementation details.
+The Validation Suite provides the infrastructure for evidence-based evaluation rather than promoting a specific implementation.
 
 ---
 
-## Quick Start
+# Quick Start
 
 Clone the repository:
 
@@ -327,189 +326,41 @@ git clone https://github.com/vlanzarini80-source/Lanzarini-Validation-Suite.git
 cd Lanzarini-Validation-Suite
 ```
 
-Run the public validation stages:
+Run the public validation workflow:
 
 ```bash
-python scripts/scripts/v1a_environment_check.py
-python scripts/scripts/v1b_adapter_contract.py
-python scripts/scripts/v1c_micro_correctness.py
-python scripts/scripts/v1d_runtime_benchmark.py
-python scripts/scripts/v1e_artifact_manifest.py
-python scripts/scripts/v1f_report_generator.py
-```
-
-Expected public-mode behavior:
-
-- **V1A** → PASS
-- **V1B** → PASS or SKIPPED_PUBLIC_MODE (depending on whether a proprietary adapter is available)
-- **V1C** → SKIPPED_PUBLIC_MODE (without the proprietary adapter)
-- **V1D** → SKIPPED_PUBLIC_MODE (without the proprietary adapter)
-- **V1E** → PASS
-- **V1F** → PASSED (`PUBLIC_VALIDATION_COMPLETE: True`)
-
-> **Public Repository Note**
->
-> The proprietary sparse-local attention kernel and its adapter are intentionally excluded from the public repository.
->
-> Therefore:
->
-> - **V1A** can be executed directly.
-> - **V1B** validates the public adapter contract against the proprietary implementation and therefore requires a locally available private adapter.
-> - If the private adapter is not available, V1B may be skipped or report that the adapter is missing. This behaviour is expected for the public repository.
-> - The remaining public validation stages operate exclusively on publicly available validation artifacts and documentation.
-
-The Validation Suite automatically generates reproducible public artifacts including:
-
-- JSON validation reports
-- CSV benchmark tables
-- Markdown reports
-- HTML reports
-- SHA-256 integrity manifests
-
-Generated artifacts are written to:
-
-```text
-results/json/
-results/csv/
-results/reports/
-```
-
-The public repository intentionally excludes the proprietary sparse-local attention implementation.
-
-Instead, it enables independent verification of the published validation workflow, benchmark methodology, reproducibility pipeline and artifact integrity.
-
-# Public Mode
-
-The public repository validates the validation framework itself.
-
-The proprietary Triton kernel is intentionally excluded.
-
-When the proprietary adapter is not available:
-
-• V1A and V1E execute normally.
-• V1B may PASS or SKIPPED_PUBLIC_MODE.
-• V1C and V1D are expected to report SKIPPED_PUBLIC_MODE.
-• V1F reports the public validation workflow as complete.
-
-The public repository validates the public validation framework and its reproducibility workflow.
-
----
-
-# Visual Overview
-
-The following diagrams summarize the public Validation Suite.
-
-*(Figures can be added as the repository evolves.)*
-
-```text
-figures/
-
-repository_architecture.png
-validation_pipeline.png
-public_vs_private.png
-experimental_results_overview.png
-backend_evaluation_scope.png
+python scripts/v1a_environment_check.py
+python scripts/v1b_adapter_contract.py
+python scripts/v1c_micro_correctness.py
+python scripts/v1d_runtime_benchmark.py
+python scripts/v1e_artifact_manifest.py
+python scripts/v1f_report_generator.py
 ```
 
 ---
 
-# Experimental Highlights
+# Public Repository Behaviour
 
-The Validation Suite summarizes experimentally validated benchmark campaigns performed on the corresponding hardware configurations.
+The proprietary sparse-local attention implementation is intentionally excluded.
 
-Representative experimentally validated observations include:
+Expected behavior:
 
-| Experiment | Representative Result |
-|------------|----------------------|
-| Energy per token vs FlexAttention | Up to **22.6% lower** in the tested configuration |
-| Throughput vs FlexAttention | Up to **25.5% higher** in the tested configuration |
-| FlashAttention comparison | **Backend selection is experimentally regime-dependent** |
-| Long-context evaluation | **Different scaling behaviour observed across tested backends** |
-| Validation Suite | Reproducible JSON, CSV, Markdown, HTML reports and SHA-256 integrity manifests |
+| Stage | Expected Result |
+|--------|-----------------|
+| V1A | PASS |
+| V1B | PASS or SKIPPED_PUBLIC_MODE |
+| V1C | SKIPPED_PUBLIC_MODE (without private adapter) |
+| V1D | SKIPPED_PUBLIC_MODE (without private adapter) |
+| V1E | PASS |
+| V1F | PASS |
 
----
-
-## What Can Be Independently Verified?
-
-Using the public Validation Suite, researchers can independently verify:
-
-- execution environment detection;
-- software configuration;
-- public validation workflow;
-- benchmark execution methodology;
-- validation artifact generation;
-- report generation;
-- SHA-256 integrity verification;
-- reproducibility of the published validation pipeline.
-
-The proprietary sparse-local attention implementation remains intentionally private and is therefore outside the scope of the public repository.
-
-> **Important**
->
-> All reported measurements are configuration-specific and limited to the experimentally validated benchmark conditions.
->
-> Performance depends on factors including sequence length, attention window, hardware platform and software stack.
->
-> Different attention backends may perform better under different experimentally evaluated regimes.
->
-> The Validation Suite provides reproducible experimental evidence and does **not** claim universal performance, energy or cost superiority of any implementation.
-
----
-
-## Experimental Summary
-
-The repository contains experimentally generated validation artifacts, benchmark summaries and reproducibility reports intended to facilitate independent scientific verification.
-
-All performance conclusions should always be interpreted together with the corresponding benchmark configuration, validation reports and published experimental artifacts.
-
----
-
-# Design Philosophy
-
-The Validation Suite follows four guiding principles:
-
-1. **Transparency** — every published validation artifact is generated through documented validation scripts and reproducible procedures.
-
-2. **Reproducibility** — experiments are designed to be repeatable under comparable hardware and software configurations.
-
-3. **Integrity** — generated artifacts are tracked through SHA-256 manifests to support long-term verification.
-
-4. **Separation of Concerns** — the public validation infrastructure is intentionally separated from proprietary implementation details.
-
-These principles ensure that published evidence can be independently verified without exposing proprietary GPU kernel source code.
-
----
-
-# Scope
-
-The Validation Suite represents the **public validation component** of the broader Lanzarini research project.
-
-### Included
-
-- Public validation scripts
-- Validation reports
-- Benchmark summaries
-- Machine-readable artifacts
-- Reproducibility documentation
-- SHA-256 integrity manifests
-
-### Not Included
-
-- Proprietary Triton kernel implementations
-- Proprietary sparse-local attention kernels
-- Proprietary backend-selection logic
-- Internal research code
-- Experimental development branches
-
-The repository is intentionally designed so that scientific validation remains reproducible while proprietary implementation details remain confidential.
+The absence of the proprietary adapter should not be interpreted as a failure of the Validation Suite.
 
 ---
 
 # Validation Pipeline
 
 The Validation Suite follows a staged validation workflow.
-
-Each validation stage verifies one component of the experimental pipeline before the following stage is executed.
 
 ```text
 Environment
@@ -518,191 +369,52 @@ Environment
 V1A ─ Environment Validation
      │
      ▼
-V1B ─ Adapter Contract Validation*
+V1B ─ Adapter Validation
      │
      ▼
-V1C ─ Micro Correctness Validation
+V1C ─ Correctness Validation
      │
      ▼
-V1D ─ Runtime Smoke Validation
+V1D ─ Runtime Validation
      │
      ▼
 V1E ─ Artifact Integrity Audit
      │
      ▼
-V1F ─ Validation Report Generator
+V1F ─ Report Generation
 ```
 
-\*V1B requires a locally available proprietary adapter and is optional in the public repository.
-
-Each stage generates reproducible validation artifacts that can be independently inspected.
-
----
-
-# Current Validation Stages
-
-| Stage | Purpose | Public Status |
-|--------|---------|---------------|
-| V1A | Environment and software validation | ✅ Published |
-| V1B | Public adapter contract validation* | ✅ Published |
-| V1C | Micro numerical correctness validation | ✅ Published |
-| V1D | Runtime smoke benchmark | ✅ Published |
-| V1E | Artifact integrity audit | ✅ Published |
-| V1F | Automatic report generation | ✅ Published |
-
-\*Requires a locally available private adapter.
-
----
-
-# Current Development Status
-
-## Version 1 — Completed
-
-Version 1 established the public validation framework including:
-
-- reproducible validation workflow;
-- documentation;
-- validation reports;
-- artifact generation;
-- integrity verification;
-- GitHub Actions automation.
-
-## Version 2 — In Progress
-
-Current work focuses on:
-
-- improving validation coverage;
-- extending reproducibility documentation;
-- improving artifact traceability;
-- repository quality improvements;
-- additional public validation stages.
-
-Only experimentally verified work is presented as completed.
-
----
-
-# Stage Descriptions
-
-## V1A — Environment Validation
-
-Verifies the execution environment before benchmark execution.
-
-Checks include:
-
-- Python version
-- CUDA availability
-- GPU detection
-- PyTorch installation
-- Triton installation
-- FlashAttention availability
-- Adapter availability
-
-This stage performs **no benchmark execution**.
-
----
-
-## V1B — Adapter Contract Validation
-
-Validates the public adapter interface used to communicate with the proprietary implementation.
-
-When a local proprietary adapter is available, this stage verifies that the adapter exposes the expected public interface.
-
-The proprietary implementation itself is never exposed.
-
-In the public repository, the adapter may be absent, which is expected.
-
----
-
-## V1C — Micro Correctness Validation
-
-Performs numerical correctness validation using controlled benchmark configurations.
-
-Outputs include:
-
-- JSON reports
-- CSV validation tables
-- CSV error reports
-
-Its objective is to verify numerical agreement with the selected reference implementation.
-
----
-
-## V1D — Runtime Smoke Validation
-
-Runs lightweight runtime measurements to verify correct benchmark execution.
-
-This stage verifies benchmark functionality only.
-
-It **does not** represent a comprehensive performance evaluation.
-
-Outputs include:
-
-- runtime summaries;
-- CSV measurements;
-- runtime reports.
-
----
-
-## V1E — Artifact Integrity Audit
-
-Builds an inventory of generated validation artifacts.
-
-For every published artifact the suite records:
-
-- filename;
-- file type;
-- size;
-- modification timestamp;
-- SHA-256 checksum.
-
-This stage supports long-term reproducibility.
-
----
-
-## V1F — Validation Report Generator
-
-Automatically generates consolidated reports from previously validated artifacts.
-
-Generated outputs include:
-
-- Markdown reports;
-- HTML reports;
-- JSON summaries.
-
-This stage does **not** execute new benchmarks.
+Each stage validates one component before the following stage is executed.
 
 ---
 
 # Repository Structure
 
-```text
+```
 Lanzarini-Validation-Suite/
 
 README.md
-LICENSE
-CHANGELOG.md
 ROADMAP.md
+CHANGELOG.md
+LICENSE
 CITATION.cff
-requirements.txt
-pyproject.toml
 
-.github/
-scripts/
 docs/
 paper/
 reports/
 artifacts/
-results/
+scripts/
 examples/
 figures/
 json/
+.github/
 ```
 
 ---
 
 # Public Artifacts
 
-The repository publishes machine-readable validation artifacts including:
+The Validation Suite publishes machine-readable artifacts including:
 
 - JSON reports
 - CSV reports
@@ -710,21 +422,7 @@ The repository publishes machine-readable validation artifacts including:
 - HTML reports
 - SHA-256 integrity manifests
 
-These artifacts allow independent inspection of the published validation workflow without requiring access to proprietary implementation details.
-
----
-
-# Validation Outputs
-
-Generated public artifacts are stored under:
-
-```text
-results/json/
-results/csv/
-results/reports/
-```
-
-Integrity manifests are stored separately to facilitate long-term verification and reproducibility.
+These artifacts allow independent inspection of the documented validation workflow.
 
 ---
 
@@ -733,55 +431,46 @@ Integrity manifests are stored separately to facilitate long-term verification a
 The Validation Suite experimentally validates:
 
 - execution environment;
-- numerical correctness;
-- runtime benchmark execution;
-- runtime stability;
-- validation artifact generation;
-- SHA-256 integrity verification;
-- reproducibility workflow.
+- correctness;
+- runtime behavior;
+- validation methodology;
+- reproducibility workflow;
+- artifact integrity.
 
-The Validation Suite does **not** validate:
+The repository does **not** claim:
 
-- theoretical optimality;
 - universal algorithmic superiority;
-- mathematical proofs;
-- performance outside experimentally evaluated configurations.
+- mathematical novelty;
+- correctness outside documented benchmark conditions;
+- universal runtime or energy improvements.
 
-Any scientific conclusion remains limited to the benchmark domains represented by the published validation artifacts.
+Scientific conclusions remain limited to experimentally evaluated configurations.
 
 ---
 
 # Backend Evaluation Scope
 
-The Validation Suite evaluates experimentally measured performance under specific benchmark configurations.
+Experimental evidence indicates that backend performance depends on the evaluated configuration.
 
-Measured results demonstrate that different attention backends may perform better under different experimentally evaluated regimes depending on factors including:
+Accordingly, backend comparisons should be interpreted only within the documented benchmark conditions.
 
-- sequence length;
-- attention window;
-- hardware platform;
-- software stack;
-- benchmark methodology.
-
-Accordingly, the purpose of the Validation Suite is to provide reproducible measurements and validation artifacts rather than demonstrate universal performance superiority of any implementation.
-
-Whenever backend comparisons are presented, conclusions remain limited to the experimentally validated benchmark configurations represented by the associated public validation artifacts.
+The repository does not claim that any backend is universally superior.
 
 ---
 
 # Reproducibility
 
-Every published validation stage generates machine-readable artifacts.
+Every published validation stage generates reproducible artifacts.
 
-Depending on the stage, these may include:
+Depending on the stage these may include:
 
-- JSON reports;
-- CSV measurement tables;
+- JSON summaries;
+- CSV measurements;
 - Markdown reports;
 - HTML reports;
-- SHA-256 integrity manifests.
+- SHA-256 manifests.
 
-These artifacts enable independent verification of the published validation workflow.
+These artifacts support independent verification of the reported validation workflow.
 
 ---
 
@@ -791,55 +480,10 @@ This repository is intended for:
 
 - machine learning researchers;
 - GPU systems researchers;
-- kernel developers;
+- AI infrastructure engineers;
 - reproducibility studies;
 - academic reviewers;
-- AI infrastructure engineers;
-- engineers interested in experimental validation methodologies.
-
----
-
-# Relationship to the Research Project
-
-The Validation Suite represents the **public validation component** of the broader Lanzarini research project.
-
-The broader research effort includes additional work on:
-
-- sparse-local attention;
-- runtime optimization;
-- backend-selection strategies;
-- proprietary GPU kernel engineering.
-
-Those research components are intentionally maintained separately from this public repository.
-
----
-
-# Repository Status
-
-Current public release:
-
-**Version 1.0.0**
-
-Current development phase:
-
-- ✅ Version 1 — Completed
-- 🚧 Version 2 — In Progress
-
-Current repository capabilities include:
-
-- public validation workflow;
-- validation artifacts;
-- reproducibility documentation;
-- SHA-256 integrity verification;
-- GitHub Actions continuous integration.
-
-Future releases will extend the Validation Suite through additional publicly reproducible validation stages and documentation.
-
----
-
-## Scientific Claims
-
-For a claim-by-claim mapping between scientific statements, supporting evidence, limitations and validation status, see [`paper/CLAIM_LEDGER.md`](paper/CLAIM_LEDGER.md).
+- kernel developers.
 
 ---
 
@@ -847,29 +491,21 @@ For a claim-by-claim mapping between scientific statements, supporting evidence,
 
 If this repository contributes to academic work, please cite the associated publication when available.
 
-Citation metadata is maintained through the included **CITATION.cff** file.
+Citation metadata is provided through:
 
----
-
-# Guiding Principle
-
-Every public statement contained in this repository is evidence-based.
-
-Measured experimental results are clearly separated from planned work.
-
-Future work is explicitly identified as future work.
-
-Only experimentally validated results are presented as completed.
+```
+CITATION.cff
+```
 
 ---
 
 # License
 
-This repository distributes the **public Validation Suite only**.
+This repository distributes only the public Validation Suite.
 
-The proprietary sparse-local attention implementation, backend-selection logic and GPU kernel source code are intentionally excluded.
+The proprietary sparse-local attention implementation, backend-selection logic and Triton kernels remain intentionally private.
 
-Please refer to the repository license for usage conditions.
+The public repository is released under the MIT License.
 
 ---
 
@@ -885,22 +521,24 @@ https://github.com/vlanzarini80-source
 
 Contact:
 
-valentino.lanzarini80@gmail.com
+vlanzarini80@gmail.com
 
 ---
 
 # Disclaimer
 
-This repository provides a public scientific validation and reproducibility framework together with experimentally generated validation artifacts.
+The purpose of this repository is to improve transparency, reproducibility and independent verification of sparse-local attention research.
 
-Its purpose is to improve transparency, reproducibility and independent verification of sparse-local attention research.
+All reported benchmark results are configuration-specific and supported only by the documented experimental evidence contained in this repository.
 
-Nothing contained in this repository should be interpreted as demonstrating universal superiority of any attention implementation.
+Nothing contained in this repository should be interpreted as demonstrating universal superiority of any implementation.
 
-All reported measurements are configuration-specific and limited to the experimentally validated benchmark conditions documented by the published validation artifacts.
-
-The proprietary sparse-local attention implementation is intentionally excluded from the public repository.
+The proprietary implementation remains intentionally excluded.
 
 ---
 
-© 2026 Valentino Lanzarini. All rights reserved.
+# Guiding Principle
+
+> **Every scientific statement in this repository is evidence-based.**
+>
+> Measured experimental evidence is clearly separated from theoretical discussion, planned work and proprietary implementation details.
