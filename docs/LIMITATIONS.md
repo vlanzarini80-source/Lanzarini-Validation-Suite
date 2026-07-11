@@ -1,5 +1,16 @@
 # Limitations
 
+This document defines the canonical limitations of the Lanzarini Validation Suite.
+
+It should be interpreted together with:
+
+- `paper/METHOD.md`
+- `paper/RESULTS.md`
+- `docs/SPECIFICATION.md`
+- `docs/CORRECTNESS.md`
+
+Only experimentally documented evidence contained in this repository should be used to interpret the reported validation results.
+
 ## Purpose
 
 This document summarizes the known limitations of the Lanzarini Validation Suite.
