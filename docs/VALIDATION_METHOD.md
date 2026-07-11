@@ -1,12 +1,35 @@
-# Validation Methodology
+# Validation Method
 
 ## Purpose
 
-This document describes the public validation methodology used by the Lanzarini Validation Suite.
+This document complements `paper/METHOD.md`.
 
-Its purpose is to define how experimental results are generated, verified, documented, and made reproducible.
+The canonical methodological description of the Lanzarini Validation Suite is maintained in:
 
-This document describes only the public validation process. It does not disclose proprietary implementation details.
+- `paper/METHOD.md`
+
+This document focuses on the practical execution of the public validation workflow.
+
+## Public Validation Workflow
+
+Typical execution stages include:
+
+1. Environment verification
+2. Adapter availability check
+3. Correctness validation
+4. Runtime benchmarking
+5. Artifact generation
+6. Integrity verification
+7. Report generation
+
+## Related Documentation
+
+- `paper/METHOD.md`
+- `docs/SPECIFICATION.md`
+- `docs/CORRECTNESS.md`
+- `docs/BENCHMARK_SCOPE.md`
+- `docs/ADAPTER_INTERFACE.md`
+- `docs/LIMITATIONS.md`
 
 ---
 
