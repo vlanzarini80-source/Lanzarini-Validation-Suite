@@ -80,6 +80,7 @@ The technical documentation for the public Validation Suite is available in the 
 | [`VALIDATION_METHODOLOGY.md`](docs/VALIDATION_METHODOLOGY.md) | Public validation methodology. |
 | [`BENCHMARK_SCOPE.md`](docs/BENCHMARK_SCOPE.md) | Scope of reported benchmark evidence. |
 | [`LIMITATIONS.md`](docs/LIMITATIONS.md) | Known limitations and interpretation boundaries. |
+| [`paper/RESULTS.md`](paper/RESULTS.md) | Consolidated experimental results and checkpoint overview. |
 
 ---
 
