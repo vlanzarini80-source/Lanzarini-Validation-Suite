@@ -93,7 +93,7 @@ The technical documentation for the public Validation Suite is available in the 
 | [`COMPLEXITY.md`](docs/COMPLEXITY.md) | Computational complexity of the documented operator. |
 | [`CORRECTNESS.md`](docs/CORRECTNESS.md) | Correctness criteria used during validation. |
 | [`ADAPTER_INTERFACE.md`](docs/ADAPTER_INTERFACE.md) | Public adapter interface specification. |
-| [`VALIDATION_METHODOLOGY.md`](docs/VALIDATION_METHODOLOGY.md) | Public validation methodology. |
+| [VALIDATION_METHOD.md](docs/VALIDATION_METHOD.md) | Public validation methodology |
 | [`BENCHMARK_SCOPE.md`](docs/BENCHMARK_SCOPE.md) | Scope of reported benchmark evidence. |
 | [`LIMITATIONS.md`](docs/LIMITATIONS.md) | Known limitations and interpretation boundaries. |
 | [`paper/RESULTS.md`](paper/RESULTS.md) | Consolidated experimental results and checkpoint overview. |
