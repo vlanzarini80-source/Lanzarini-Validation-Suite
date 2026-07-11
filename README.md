@@ -1,5 +1,7 @@
 # Lanzarini Validation Suite
 
+https://zenodo.org/badge/1284306738.svg
+
 > **Public validation and reproducibility framework for sparse-local attention research.**
 
 ![Validation](https://img.shields.io/badge/Validation-Stable-brightgreen)
