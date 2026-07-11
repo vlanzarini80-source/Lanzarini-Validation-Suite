@@ -37,6 +37,22 @@
 
 **Repository Status:** Stable
 
+## Repository Guide
+
+The repository is organized into the following primary sections:
+
+| Location | Purpose |
+|----------|---------|
+| `README.md` | Project overview and quick start. |
+| `ROADMAP.md` | Development roadmap and future milestones. |
+| `PROJECT_STATUS.md` | Current validation status. |
+| `paper/RESULTS.md` | Consolidated overview of experimental checkpoints. |
+| `paper/results/` | Individual experimental checkpoint reports (V42–V61). |
+| `docs/` | Public documentation and methodology. |
+| `reports/` | Validation reports and supporting documentation. |
+| `artifacts/` | Public JSON and CSV artifacts. |
+| `scripts/` | Public validation scripts. |
+
 ### Public Validation Progress
 
 | Validation Stage | Status |
