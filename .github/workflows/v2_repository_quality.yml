@@ -1,0 +1,57 @@
+name: V2 Repository Quality
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  repository-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Check required files
+        run: |
+          test -f README.md
+          test -f ROADMAP.md
+          test -f CHANGELOG.md
+          test -f CITATION.cff
+          test -f LICENSE
+          test -f SECURITY.md
+          test -f CONTRIBUTING.md
+          test -f CODE_OF_CONDUCT.md
+          test -f paper/PROJECT_STATUS.md
+          test -f paper/V2_VALIDATION_PLAN.md
+          test -f reports/v2/VALIDATION_REPORT_TEMPLATE.md
+
+      - name: Check required directories
+        run: |
+          test -d paper
+          test -d reports
+          test -d reports/v2
+          test -d json
+          test -d artifacts
+          test -d scripts
+          test -d docs
+          test -d examples
+          test -d figures
+
+      - name: Check Markdown files are not empty
+        run: |
+          test -s README.md
+          test -s ROADMAP.md
+          test -s CHANGELOG.md
+          test -s paper/PROJECT_STATUS.md
+          test -s paper/V2_VALIDATION_PLAN.md
+          test -s reports/v2/VALIDATION_REPORT_TEMPLATE.md
+
+      - name: Check Python syntax
+        run: |
+          python -m compileall scripts
