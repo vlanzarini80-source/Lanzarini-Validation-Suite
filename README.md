@@ -60,6 +60,55 @@ The technical documentation for the public Validation Suite is available in the 
 
 ---
 
+## Experimental Results and Checkpoints
+
+The repository includes public summaries of selected experimental checkpoints from the Lanzarini sparse-local attention research program.
+
+These reports document preserved measurements, correctness outcomes, benchmark observations, methodological corrections, and known limitations.
+
+The proprietary Triton implementation is not included.
+
+### Consolidated Results
+
+- [`paper/RESULTS.md`](paper/RESULTS.md) — consolidated experimental results, including V52D-R2-FIX, V56A blind-router validation, and V56B-LITE transition-band measurements.
+- [`paper/VALIDATION_OVERVIEW.md`](paper/VALIDATION_OVERVIEW.md) — high-level overview of the public validation workflow.
+
+### Individual Checkpoint Reports
+
+| Checkpoint | Experimental topic | Public report |
+|---|---|---|
+| V42D-A-R | Native vLLM integration validation | [`V42D-A-R.md`](paper/results/V42D-A-R.md) |
+| V43A | End-to-end adapter performance and reconstruction bottleneck | [`V43A.md`](paper/results/V43A.md) |
+| V44A-2M | Micro paged-native reference correctness audit | [`V44A-2M.md`](paper/results/V44A-2M.md) |
+| V48A-2R | NVML sparse-local energy repeat-loop audit | [`V48A-2R.md`](paper/results/V48A-2R.md) |
+| V52D-R2-FIX | Corrected Lanzarini G4 vs FlashAttention benchmark | [`V52D-R2-FIX.md`](paper/results/V52D-R2-FIX.md) |
+| V56G-R | Corrected blind-router validation | [`V56G-R.md`](paper/results/V56G-R.md) |
+| V56H-LOCK | Boundary validation | [`V56H-LOCK.md`](paper/results/V56H-LOCK.md) |
+| V56I-LOCK | Corrected boundary-router validation | [`V56I-LOCK.md`](paper/results/V56I-LOCK.md) |
+| V57C | FlashAttention correctness validation against SDPA | [`V57C.md`](paper/results/V57C.md) |
+| V58A | FlashAttention vs Lanzarini head-to-head benchmark | [`V58A.md`](paper/results/V58A.md) |
+| V58B | Measured backend-winner extraction | [`V58B.md`](paper/results/V58B.md) |
+| V59A | Interpretable backend-router learning | [`V59A.md`](paper/results/V59A.md) |
+| V60A-LITE | Dense empirical frontier sweep | [`V60A-LITE.md`](paper/results/V60A-LITE.md) |
+| V61B | Two-dimensional frontier interpretation | [`V61B.md`](paper/results/V61B.md) |
+
+### Interpretation
+
+The checkpoint reports contain different levels of preserved evidence.
+
+Some reports include row-level numerical measurements, while others contain only preserved experimental summaries because the original byte-identical JSON or CSV artifacts have not yet been recovered or published.
+
+Each report states its own evidence scope and limitations.
+
+The reported results:
+
+- apply only to the documented experimental configurations;
+- do not establish universal performance or energy superiority;
+- do not demonstrate generalization to untested hardware or workloads;
+- do not expose the proprietary kernel implementation.
+
+---
+
 ## Scientific Positioning
 
 This repository documents a public validation and reproducibility framework for a sparse-local attention operator.
