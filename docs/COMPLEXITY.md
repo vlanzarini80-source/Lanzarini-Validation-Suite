@@ -1,5 +1,15 @@
 # Computational Complexity
 
+This document defines the canonical computational complexity analysis of the sparse-local attention operator evaluated by the Lanzarini Validation Suite.
+
+It should be interpreted together with:
+
+- `docs/SPECIFICATION.md`
+- `paper/METHOD.md`
+- `docs/BENCHMARK_SCOPE.md`
+
+The analysis presented here concerns only the mathematical operator and must not be interpreted as a guarantee of runtime performance on any particular implementation or hardware platform.
+
 ## Purpose
 
 This document describes the computational complexity of the sparse-local attention operator specified in `docs/SPECIFICATION.md`.
