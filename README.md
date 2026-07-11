@@ -313,12 +313,14 @@ cd Lanzarini-Validation-Suite
 
 Run the public validation stages:
 
+```bash
 python scripts/scripts/v1a_environment_check.py
 python scripts/scripts/v1b_adapter_contract.py
 python scripts/scripts/v1c_micro_correctness.py
 python scripts/scripts/v1d_runtime_benchmark.py
 python scripts/scripts/v1e_artifact_manifest.py
 python scripts/scripts/v1f_report_generator.py
+```
 
 Expected public-mode behavior:
 
