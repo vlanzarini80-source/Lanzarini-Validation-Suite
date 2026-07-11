@@ -1,5 +1,16 @@
 # Adapter Interface
 
+This document defines the canonical public adapter interface of the Lanzarini Validation Suite.
+
+It should be interpreted together with:
+
+- `paper/METHOD.md`
+- `docs/SPECIFICATION.md`
+- `docs/CORRECTNESS.md`
+- `docs/VALIDATION_METHOD.md`
+
+The adapter defines the public software boundary between the Validation Suite and any compatible implementation of the evaluated sparse-local attention operator.
+
 ## Purpose
 
 This document defines the public adapter interface used by the Lanzarini Validation Suite.
