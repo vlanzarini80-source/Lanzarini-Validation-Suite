@@ -10,6 +10,29 @@
 
 ---
 
+## Table of Contents
+
+- [Current Status](#current-status)
+- [Repository Scope](#repository-scope)
+- [Documentation](#documentation)
+- [Scientific Positioning](#scientific-positioning)
+- [Research Claims](#research-claims)
+- [Evidence Policy](#evidence-policy)
+- [Objectives](#objectives)
+- [Motivation](#motivation)
+- [Repository at a Glance](#repository-at-a-glance)
+- [Quick Start](#quick-start)
+- [Experimental Results and Checkpoints](#experimental-results-and-checkpoints)
+- [Validation Pipeline](#validation-pipeline)
+- [Repository Structure](#repository-structure)
+- [Scientific Scope](#scientific-scope)
+- [Backend Evaluation Scope](#backend-evaluation-scope)
+- [Reproducibility](#reproducibility)
+- [Citation](#citation)
+- [License](#license)
+
+---
+
 ## Current Status
 
 **Repository Status:** Stable
