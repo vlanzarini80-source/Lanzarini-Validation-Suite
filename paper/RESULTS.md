@@ -2,18 +2,29 @@
 
 ## Overview
 
-This document provides a consolidated overview of the public experimental checkpoints currently documented in the Lanzarini Validation Suite.
+This document provides a consolidated overview of the experimental validation checkpoints currently documented in the public Lanzarini Validation Suite.
 
-Each checkpoint summarizes one experimentally documented stage of the research program.
+The repository intentionally separates:
 
-The proprietary Triton implementation is intentionally excluded from this repository.
+- public validation reports;
+- preserved experimental summaries;
+- publicly available JSON and CSV artifacts;
+- proprietary implementation details, which are intentionally excluded.
+
+Detailed checkpoint reports are available in:
+
+```
+paper/results/
+```
+
+Each report documents its own experimental scope, preserved evidence, limitations, and interpretation.
 
 ---
 
-## Public Experimental Timeline
+# Public Experimental Timeline
 
 | Checkpoint | Topic | Status |
-|------------|--------|--------|
+|------------|-------|--------|
 | V42D-A-R | Native vLLM adapter validation | ✅ |
 | V43A | Adapter performance analysis | ✅ |
 | V44A-2M | Micro paged-native correctness | ✅ |
@@ -33,54 +44,77 @@ The proprietary Triton implementation is intentionally excluded from this reposi
 
 ---
 
-## Individual Reports
+# Individual Reports
 
-| Report | Description |
-|---------|-------------|
-| [V42D-A-R](results/V42D-A-R.md) | Native vLLM adapter validation. |
-| [V43A](results/V43A.md) | End-to-end adapter performance analysis. |
-| [V44A-2M](results/V44A-2M.md) | Micro paged-native correctness audit. |
-| [V48A-2R](results/V48A-2R.md) | Sparse-local energy repeat-loop validation. |
-| [V52D-R2-FIX](results/V52D-R2-FIX.md) | Canonical corrected benchmark versus FlashAttention. |
-| [V56A](results/V56A.md) | Blind router validation. |
-| [V56B-LITE](results/V56B-LITE.md) | Transition-band sweep. |
-| [V56G-R](results/V56G-R.md) | Corrected blind-router validation. |
-| [V56H-LOCK](results/V56H-LOCK.md) | Boundary validation campaign. |
-| [V56I-LOCK](results/V56I-LOCK.md) | Corrected boundary validation. |
-| [V57C](results/V57C.md) | FlashAttention correctness validation against SDPA. |
-| [V58A](results/V58A.md) | Direct benchmark comparison. |
-| [V58B](results/V58B.md) | Backend winner extraction. |
-| [V59A](results/V59A.md) | Empirical backend-selection rule. |
-| [V60A-LITE](results/V60A-LITE.md) | Dense empirical frontier mapping. |
-| [V61B](results/V61B.md) | Transition-region analysis. |
+The corresponding detailed reports are located in:
+
+```
+paper/results/
+```
+
+Each checkpoint has its own standalone report describing:
+
+- experimental purpose;
+- benchmark protocol;
+- preserved measurements;
+- limitations;
+- strict interpretation.
 
 ---
 
-## Evidence Policy
+# Checkpoint Naming
 
-The checkpoint reports contain different levels of preserved evidence.
+Checkpoint suffixes identify internal validation revisions used during the research program.
 
-Some reports include detailed experimental measurements.
+Common suffixes include:
 
-Others preserve validated summaries because the original row-level artifacts are no longer publicly available.
+| Suffix | Meaning |
+|---------|---------|
+| R | Revised validation or corrected rerun |
+| FIX | Corrected benchmark methodology |
+| LITE | Reduced public benchmark campaign |
+| LOCK | Frozen validation checkpoint |
+| 2M | Second micro-validation campaign |
+| 2R | Second revised validation campaign |
 
-Each report explicitly documents its own evidence scope and limitations.
+These identifiers are project naming conventions only.
+
+They must not be interpreted as performance levels or maturity indicators.
+
+---
+
+# Evidence Policy
+
+The checkpoint reports contain different levels of preserved experimental evidence.
+
+Some checkpoints include complete numerical measurements.
+
+Others preserve validated numerical summaries because the original row-level runtime artifacts are not currently part of the public repository.
+
+Each report explicitly documents:
+
+- available evidence;
+- missing evidence;
+- preserved numerical summaries;
+- experimental limitations.
+
+No unsupported conclusion should be inferred from preserved summaries.
 
 ---
 
-## Scope
+# Scope
 
-This document reports only experimental results obtained during the Lanzarini project.
+This repository documents only experimentally measured results obtained during the Lanzarini research project.
 
-Only measurements produced by the benchmark scripts are reported.
+Only benchmark measurements generated during the original validation campaigns are reported.
 
-No estimated, reconstructed, interpolated or fabricated benchmark values are included.
+No estimated, reconstructed, interpolated, simulated, or fabricated benchmark values are included.
 
-Whenever the original JSON or CSV artifacts are not currently available, the corresponding checkpoint is explicitly identified as a preserved numerical summary.
+Whenever original JSON or CSV runtime artifacts are unavailable in the public repository, the corresponding checkpoint explicitly states this limitation.
 
-No unsupported performance claim should be inferred from this document.
+Performance claims must always be interpreted only within the tested configurations.
 
----
+The following sections present the experimental checkpoints in chronological order.
 
 # V52D-R2-FIX
 
