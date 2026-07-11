@@ -40,25 +40,11 @@ Implementation-specific optimization strategies are outside the scope of this sp
 
 ## Document Status
 
-**Current version:** Draft 2
+**Current version:** Version 1.0
 
-The current document includes:
+This document defines the canonical mathematical specification used by the Lanzarini Validation Suite.
 
-- purpose;
-- scope;
-- design goals;
-- formal mathematical definition.
-
-Future revisions may include:
-
-- implementation-independent pseudocode;
-- computational complexity analysis;
-- numerical properties;
-- correctness discussion;
-- validation methodology;
-- documented limitations.
-
-Future additions will remain consistent with the objective of documenting the mathematical behavior of the operator without disclosing proprietary implementation details.
+Future revisions may improve presentation and documentation while preserving the mathematical semantics described here.
 
 ---
 
