@@ -360,6 +360,8 @@ The absence of the proprietary adapter should not be interpreted as a failure of
 
 # Validation Pipeline
 
+![Validation Pipeline](figures/validation_pipeline.png)
+
 The Validation Suite follows a staged validation workflow.
 
 ```text
