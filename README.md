@@ -390,6 +390,8 @@ Each stage validates one component before the following stage is executed.
 
 # Repository Structure
 
+![Repository Architecture](figures/repository_architecture.png)
+
 ```
 Lanzarini-Validation-Suite/
 
